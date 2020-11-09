@@ -8,7 +8,8 @@ import Bar from './component/bar'
 
 ReactDOM.render(
   <BrowserRouter>
-    <Bar />
+    
+    <App/>
   </BrowserRouter>,
   document.getElementById('root')
 );
