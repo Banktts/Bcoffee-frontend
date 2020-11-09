@@ -1,0 +1,46 @@
+.bar {
+    width: 18%;
+    min-height: 100vh;
+    background-color: #846E61;
+    color: #ffffff;
+    padding-top: 20px;
+    .custom-logo {
+    width: 20%;
+    height: 20%;
+    margin-right: 20px;
+}
+ul {
+    list-style-type: none;
+}
+.ant-menu-item {
+    padding-left: 0px !important;
+    height: 40px;
+    color: white ;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.ant-menu-item:hover {
+    background-color: white;
+    a {
+        color: #846E61;
+    }
+}
+.ant-menu {
+    text-align: center;
+    padding: 0px;
+} 
+.text-semibold {
+    font-size: 36px;
+    font-weight: 600;
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
+
+}

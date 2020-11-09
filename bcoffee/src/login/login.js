@@ -16,21 +16,24 @@ const Login = () => {
         setPassWord(e.target.value)
     }
     return (
-        <div className="flex-row">
-            <img src={coffee} className="img-coffee" />
-            <div className="m-left center">
-                <div className="text-big">
-                    B-coffee
+        <div className="login">
+            <div className="flex-row flex-center">
+                <img src={coffee} className="img-coffee" />
+                <div className="m-left text-center">
+                    <div className="text-big">
+                        B-coffee
                 </div>
-                <Space direction="vertical" align="center" className="margin">
-                    <Input placeholder="username" value={userName} onChange={handleChangeUser} className="input" />
-                    <Input placeholder="password" value={passWord} onChange={handleChangePassWord} className="input" />
-                </Space>
-                <Button className="button">
-                    Login
+                    <Space direction="vertical" align="center" className="margin">
+                        <Input placeholder="username" value={userName} onChange={handleChangeUser} className="input" />
+                        <Input placeholder="password" value={passWord} onChange={handleChangePassWord} className="input" />
+                    </Space>
+                    <Button className="button">
+                        Login
                 </Button>
+                </div>
             </div>
         </div>
+
     )
 }
 
