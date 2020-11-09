@@ -1,42 +1,37 @@
-.flex-row {
-  display: flex;
-  flex-direction: row;
+.login.row-center {
   align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
 }
-.img-coffee {
+.login.img-coffee {
   width: 246px;
 }
-.text-big {
+.login.text-big {
   font-size: 72px;
   font-weight: 500;
   color: #968e89;
 }
-.m-left {
+.login.m-left {
   margin-left: 40px;
 }
-.button {
+.login.button {
   background-color: #968e89;
   width: 250px;
   height: 30px;
   border-radius: 4px;
 }
-.button:hover {
+.login.button:hover {
   background-color: #c9c0bb;
 }
-.input {
+.login.input {
   height: 24px;
   width: 238px;
   padding: 1px 4px;
   border-color: #968e89;
   border-radius: 4px;
 }
-.center {
-  text-align: center;
-}
-.margin {
+.login.margin {
   margin: 20px 0px;
 
 }
