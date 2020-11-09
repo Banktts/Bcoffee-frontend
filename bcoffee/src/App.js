@@ -7,6 +7,7 @@ import Inventory from './inventory/inventory'
 import Order from './order/order'
 import Login from './login/login'
 
+
 const App = () => {
   const history = useHistory();
   const location = useLocation();
@@ -22,7 +23,7 @@ const App = () => {
   return (
     <Router history={history}>
       <div className="flex flex-row">
-        {checkPath(location.pathname) ? <Bar /> : null}
+        <Bar /> 
         <Switch>
           <Route exact path="/" component={Login} />
           <Route path="/employee" component={Employee} />
