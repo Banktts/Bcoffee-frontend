@@ -28,7 +28,8 @@
 }
 .input {
   height: 24px;
-  width: 242px;
+  width: 238px;
+  padding: 1px 4px;
   border-color: #968e89;
   border-radius: 4px;
 }
