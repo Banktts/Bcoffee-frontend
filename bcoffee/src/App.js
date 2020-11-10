@@ -23,9 +23,9 @@ const App = () => {
       <div className="flex flex-row">
         {checkPath(location.pathname) ? <Bar /> : null}
         <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/employee" component={Employee} />
           <Route path="/order" component={Order} />
+          <Route path="/login" component={Login} />
+          <Route path="/employee" component={Employee} />
           <Route path="/inventory" component={Inventory} />
         </Switch>
       </div>

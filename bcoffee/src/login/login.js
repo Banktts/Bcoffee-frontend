@@ -26,10 +26,11 @@ const Login = () => {
                     <Space direction="vertical" align="center" className="margin">
                         <Input placeholder="username" value={userName} onChange={handleChangeUser} className="input" />
                         <Input placeholder="password" value={passWord} onChange={handleChangePassWord} className="input" />
+                        <Button className="button">
+                            Login
+                        </Button>
                     </Space>
-                    <Button className="button">
-                        Login
-                </Button>
+
                 </div>
             </div>
         </div>

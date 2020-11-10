@@ -1,8 +1,8 @@
-import { Table } from 'antd'
-import React from 'react';
+import { Row, Table } from 'antd'
+import React from 'react'
 import './order.scss'
-import { Link } from "react-router-dom";
-
+import { Link } from "react-router-dom"
+import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
 
 const data = [
     {
@@ -75,65 +75,51 @@ const Order = () => {
             title: "Gender",
             dataIndex: "gender",
             key: "gender",
-            // render: (text, record) => {
-            //     <>
-            //         {record.gender}
-            //     </>
-            // }
         },
         {
             title: "Position",
             dataIndex: "position",
             key: "position",
-            // render: (text, record) => {
-            //     <>
-            //         {record.position}
-            //     </>
-            // }
         },
         {
             title: "Birthdate",
             dataIndex: "birthdate",
             key: "birthdate",
-            // render: (text, record) => {
-            //     <>
-            //         {record.birthdate}
-            //     </>
-            // }
         },
         {
             title: "Start date",
             dataIndex: "startDate",
             key: "startDate",
-            // render: (text, record) => {
-            //     <>
-            //         {record.startDate}
-            //     </>
-            // }
         },
         {
             title: "Salary",
             dataIndex: "salary",
             key: "salary",
-            // render: (text, record) => {
-            //     <>
-            //         {record.salary}
-            //     </>
-            // }
         },
+        {
+            title: "",
+            dataIndex: "edit",
+            key: "edit",
+            render: (text) => (
+                <DeleteOutlined />
+            )
+
+
+        }
     ]
 
     return (
         <div className="order-container">
-            <div className="flex-row">
-                <div>
+            <Row justify="space-between" align="middle" className="m-b-20">
+                <div className="text-title">
                     Order
                 </div>
-                <div>
-                    <Link to="/order/make" >Make an order</Link>
+                <div className="link-button">
+                    <Link to="/order/make" className="text-link"><PlusOutlined /> Make an order</Link>
                 </div>
-            </div>
-            <Table dataSource={data} columns={columns} pagination={false} />
+            </Row>
+
+            <Table dataSource={data} columns={columns} pagination={false} className="table" />
         </div>
     )
 }
