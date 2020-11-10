@@ -1,4 +1,4 @@
-import './login.css'
+import './login.scss'
 import coffee from '../image/coffee.svg'
 import { Button, Input, Space } from 'antd'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
@@ -17,7 +17,7 @@ const Login = () => {
     }
     return (
         <div className="login">
-            <div className="flex-row flex-center">
+            <div className="flex-row row-center">
                 <img src={coffee} className="img-coffee" />
                 <div className="m-left text-center">
                     <div className="text-big">
