@@ -1,3 +1,5 @@
+@import '../index.scss';
+
 .login {
     .row-center {
         align-items: center;
@@ -21,13 +23,15 @@
         width: 250px;
         height: 30px;
         border-radius: 4px;
+        border: none;
+        &:hover {
+            background-color: #c9c0bb;
+            color: black;
         }
-    .button:hover {
-        background-color: #c9c0bb;
-        }
+    }
     .input {
-        height: 24px;
-        width: 238px;
+        height: 30px;
+        width: 250px;
         padding: 1px 4px;
         border-color: #968e89;
         border-radius: 4px;
