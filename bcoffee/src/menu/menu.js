@@ -8,67 +8,57 @@ import { Option } from 'antd/lib/mentions'
 const data = [
     {
         key: "1",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
+        imgUrl: "12",
+        menuNo: "salt",
+        menuName: "33",
+        type: "100",
+        price: "g",
+        ingredient: "xxx",
     },
     {
         key: "2",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
+        imgUrl: "12",
+        menuNo: "salt",
+        menuName: "33",
+        type: "100",
+        price: "g",
+        ingredient: "xxx",
     },
     {
         key: "3",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
+        imgUrl: "12",
+        menuNo: "salt",
+        menuName: "33",
+        type: "100",
+        price: "g",
+        ingredient: "xxx",
     },
     {
         key: "4",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
+        imgUrl: "12",
+        menuNo: "salt",
+        menuName: "33",
+        type: "100",
+        price: "g",
+        ingredient: "xxx",
     },
     {
         key: "5",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
+        imgUrl: "12",
+        menuNo: "salt",
+        menuName: "33",
+        type: "100",
+        price: "g",
+        ingredient: "xxx",
     },
     {
         key: "6",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "7",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "8",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
+        imgUrl: "12",
+        menuNo: "salt",
+        menuName: "33",
+        type: "100",
+        price: "g",
+        ingredient: "xxx",
     },
 ]
 
@@ -76,9 +66,19 @@ const Menu = () => {
 
     const columns = [
         {
-            title: "Item No",
-            dataIndex: "itemNo",
-            key: "itemNo",
+            title: "",
+            dataIndex: "imgUrl",
+            key: "imgUrl",
+        },
+        {
+            title: "Menu No",
+            dataIndex: "menuNo",
+            key: "menuNo",
+        },
+        {
+            title: "Menu Name",
+            dataIndex: "menuName",
+            key: "menuName",
         },
         {
             title: "Type",
@@ -86,19 +86,14 @@ const Menu = () => {
             key: "type",
         },
         {
-            title: "Branch No",
-            dataIndex: "branchNo",
-            key: "branchNo",
+            title: "Price",
+            dataIndex: "price",
+            key: "price",
         },
         {
-            title: "Amount",
-            dataIndex: "amount",
-            key: "amount",
-        },
-        {
-            title: "Unit",
-            dataIndex: "unit",
-            key: "unit",
+            title: "Ingredient",
+            dataIndex: "ingredient",
+            key: "ingredient",
         },
         {
             title: "",
