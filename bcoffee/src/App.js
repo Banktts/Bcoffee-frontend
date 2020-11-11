@@ -5,6 +5,8 @@ import Employee from './employee/employee'
 import Inventory from './inventory/inventory'
 import Order from './order/order'
 import Login from './login/login'
+import Menu from './menu/menu'
+import Branch from './branch/branch'
 
 const App = () => {
   const history = useHistory();
@@ -21,12 +23,15 @@ const App = () => {
   return (
     <Router history={history}>
       <div className="flex flex-row">
-        {checkPath(location.pathname) ? <Bar /> : null}
+        {/* {checkPath(location.pathname) ? <Bar /> : null} */}
+        <Bar />
         <Switch>
-          <Route path="/order" component={Order} />
+          <Route exact path="/" component={Order} />
           <Route path="/login" component={Login} />
           <Route path="/employee" component={Employee} />
           <Route path="/inventory" component={Inventory} />
+          <Route path="/menu" component={Menu} />
+          <Route path="/branch" component={Branch} />
         </Switch>
       </div>
     </Router>
