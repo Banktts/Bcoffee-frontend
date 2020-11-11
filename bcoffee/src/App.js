@@ -23,16 +23,15 @@ const App = () => {
   return (
     <Router history={history}>
       <div className="flex flex-row">
-        {/* {checkPath(location.pathname) ? <Bar /> : null} */}
-        <Bar />
+        {checkPath(location.pathname) ? <Bar /> : null}
         <Switch>
-          <Route exact path="/" component={Order} />
-          <Route path="/login" component={Login} />
-          <Route path="/employee" component={Employee} />
-          <Route path="/inventory" component={Inventory} />
-          <Route path="/menu" component={Menu} />
-          <Route path="/branch" component={Branch} />
-          <Route path="/order/make" component={MakeOrder} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/order" component={Order} />
+          <Route exact path="/employee" component={Employee} />
+          <Route exact path="/inventory" component={Inventory} />
+          <Route exact path="/menu" component={Menu} />
+          <Route exact path="/branch" component={Branch} />
+          <Route exact path="/order/make" component={MakeOrder} />
         </Switch>
       </div>
     </Router>

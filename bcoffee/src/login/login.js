@@ -3,17 +3,21 @@ import coffee from '../image/coffee.svg'
 import { Button, Input, Space } from 'antd'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 const Login = () => {
-
     const [userName, setUserName] = useState("")
     const [passWord, setPassWord] = useState("")
+    const history = useHistory()
 
     const handleChangeUser = (e) => {
         setUserName(e.target.value)
     }
     const handleChangePassWord = (e) => {
         setPassWord(e.target.value)
+    }
+    const handleClickLogin = (e) => {
+        history.push("/order")
     }
     return (
         <div className="login">
@@ -26,7 +30,7 @@ const Login = () => {
                     <Space direction="vertical" align="center" className="margin">
                         <Input placeholder="username" value={userName} onChange={handleChangeUser} className="input" />
                         <Input placeholder="password" value={passWord} onChange={handleChangePassWord} className="input" />
-                        <Button className="button">
+                        <Button className="button" onClick={handleClickLogin}>
                             Login
                         </Button>
                     </Space>
