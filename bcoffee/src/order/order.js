@@ -110,7 +110,7 @@ const Order = () => {
 
     return (
         <div className="order-container">
-            <Row justify="space-between" align="middle" className="m-b-20">
+            <Row justify="space-between" align="middle" className="m-b-16">
                 <div className="text-title">
                     Order
                 </div>
