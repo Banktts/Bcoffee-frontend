@@ -9,58 +9,50 @@ import moment from "moment";
 const data = [
     {
         key: "1",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
+        orderNo: "O001",
+        customerId: "C002",
+        branchName: "Chula",
+        date: "DD/MM/YY",
+        time: "HH:MM",
+        totalPrice: "30000"
     },
     {
         key: "2",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
+        orderNo: "O001",
+        customerId: "C002",
+        branchName: "Chula",
+        date: "DD/MM/YY",
+        time: "HH:MM",
+        totalPrice: "30000"
     },
     {
         key: "3",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
+        orderNo: "O001",
+        customerId: "C002",
+        branchName: "Chula",
+        date: "DD/MM/YY",
+        time: "HH:MM",
+        totalPrice: "30000"
     },
     {
         key: "4",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
+        orderNo: "O001",
+        customerId: "C002",
+        branchName: "Chula",
+        date: "DD/MM/YY",
+        time: "HH:MM",
+        totalPrice: "30000"
     },
     {
         key: "5",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
+        orderNo: "O001",
+        customerId: "C002",
+        branchName: "Chula",
+        date: "DD/MM/YY",
+        time: "HH:MM",
+        totalPrice: "30000"
     },
-    {
-        key: "6",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
-    }
+
 ]
 
 
@@ -69,34 +61,34 @@ const Order = () => {
     const dateFormat = "DD/MM/YYYY";
     const columns = [
         {
-            title: "Name",
-            dataIndex: "name",
-            key: "name",
+            title: "Order No",
+            dataIndex: "orderNo",
+            key: "orderNo",
         },
         {
-            title: "Gender",
-            dataIndex: "gender",
-            key: "gender",
+            title: "CustomerId",
+            dataIndex: "customerId",
+            key: "customerId",
         },
         {
-            title: "Position",
-            dataIndex: "position",
-            key: "position",
+            title: "Branch Name",
+            dataIndex: "branchName",
+            key: "branchName",
         },
         {
-            title: "Birthdate",
-            dataIndex: "birthdate",
-            key: "birthdate",
+            title: "Date",
+            dataIndex: "date",
+            key: "date",
         },
         {
-            title: "Start date",
-            dataIndex: "startDate",
-            key: "startDate",
+            title: "Time",
+            dataIndex: "time",
+            key: "time",
         },
         {
-            title: "Salary",
-            dataIndex: "salary",
-            key: "salary",
+            title: "Total Price",
+            dataIndex: "totalPrice",
+            key: "totalPrice",
         },
         {
             title: "",
