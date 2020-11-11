@@ -1,0 +1,52 @@
+.employee-container {
+    width: 100%;
+    padding: 40px;
+    .ant-table-thead > tr > th {
+        color: #846E61;
+        font-size: 16px;
+        font-weight: 600;
+        background: #f2f3f7;
+    }
+    .ant-table-tbody {
+        color: #846E61;
+    }
+    .text-title {
+        font-size: 28px;
+        font-weight: 600;
+        color:  #846E61;
+    }
+    .link-button {
+        background-color:  #FDE87A;
+        border-radius: 4px;
+        height: 36px;
+        width: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+            background-color: #eff175;
+        }
+    }
+    .text-link {
+        color: #846E61;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    .ant-select {
+        width: 200px;
+    }
+    .ant-select:not(.ant-select-disabled):hover .ant-select-selector{
+        border-color: #846E61;
+        box-shadow: #846E61;
+    }
+    .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+        border-color: #846E61;
+        box-shadow: 0 0 0 1px #846E61;
+    }
+    .ant-select-open {
+        background-color: #846E61;
+    }
+    
+}
