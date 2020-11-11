@@ -16,8 +16,9 @@
         color:  #846E61;
     }
     .link-button {
-        background-color:  #FDE87A;
+        background-color: #846E61;
         border-radius: 4px;
+        border: none;
         height: 36px;
         width: 150px;
         display: flex;
@@ -25,11 +26,11 @@
         justify-content: center;
         align-items: center;
         &:hover {
-            background-color: #eff175;
+            background-color: #bb9680;
         }
     }
     .text-link {
-        color: #846E61;
+        color: white;
         text-decoration: none;
         font-size: 16px;
         font-weight: 500;
