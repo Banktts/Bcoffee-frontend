@@ -1,4 +1,3 @@
-import './App.css';
 import { Switch, Route, Router, useLocation, useHistory } from "react-router-dom";
 import Bar from './component/bar'
 import Employee from './employee/employee'
@@ -7,6 +6,7 @@ import Order from './order/order'
 import Login from './login/login'
 import Menu from './menu/menu'
 import Branch from './branch/branch'
+import MakeOrder from './order/makeOrder'
 
 const App = () => {
   const history = useHistory();
@@ -32,6 +32,7 @@ const App = () => {
           <Route path="/inventory" component={Inventory} />
           <Route path="/menu" component={Menu} />
           <Route path="/branch" component={Branch} />
+          <Route path="/order/make" component={MakeOrder} />
         </Switch>
       </div>
     </Router>
