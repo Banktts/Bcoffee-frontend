@@ -13,19 +13,22 @@ const Bar = () => {
                     B-coffee
                 </div>
             </div>
-            <Menu mode="inline" defaultSelectedKeys="1">
+            <Menu mode="inline" defaultSelectedKeys="1" >
                 <Menu.Item key="1" >
                     <Link to="/order">Order</Link>
                 </Menu.Item>
                 <Menu.Item key="2" >
                     <Link to="/inventory">Inventory</Link>
                 </Menu.Item>
+                <Menu.Item key="2" >
+                    <Link to="/menu">Menu</Link>
+                </Menu.Item>
                 <Menu.Item key="3" >
                     <Link to="/employee">Employee</Link>
                 </Menu.Item>
-                {/* <Menu.Item key="4" >
-                    Logout
-            </Menu.Item> */}
+                <Menu.Item key="4" >
+                    <Link to="/branch">Branch</Link>
+                </Menu.Item>
             </Menu>
         </div>
 
