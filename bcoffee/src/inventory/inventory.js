@@ -1,5 +1,5 @@
 import './inventory.scss'
-import { Col, Row, Select, Table } from 'antd'
+import { Button, Col, Row, Select, Table } from 'antd'
 import React from 'react'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
@@ -107,13 +107,17 @@ const Inventory = () => {
             render: (text) => (
                 <Row align="middle" justify="center" gutter={["16", "0"]}>
                     <Col>
-                        <EditOutlined />
+                        <Button>
+                            <EditOutlined />
+                        </Button>
+
                     </Col>
                     <Col>
-                        <DeleteOutlined />
+                        <Button>
+                            <DeleteOutlined />
+                        </Button>
                     </Col>
                 </Row>
-
             )
         }
     ]

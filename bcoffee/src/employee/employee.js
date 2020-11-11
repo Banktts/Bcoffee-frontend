@@ -1,8 +1,8 @@
-import { Col, Row, Select, Table } from 'antd'
+import { Button, Col, Row, Select, Table } from 'antd'
 import React from 'react'
 import './employee.scss'
 import { Link } from "react-router-dom"
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
+import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
 
 const data = [
@@ -100,7 +100,19 @@ const Employee = () => {
             dataIndex: "edit",
             key: "edit",
             render: (text) => (
-                <DeleteOutlined />
+                <Row align="middle" justify="center" gutter={["16", "0"]}>
+                    <Col>
+                        <Button>
+                            <EditOutlined />
+                        </Button>
+
+                    </Col>
+                    <Col>
+                        <Button>
+                            <DeleteOutlined />
+                        </Button>
+                    </Col>
+                </Row>
             )
 
 
