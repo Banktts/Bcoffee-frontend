@@ -1,8 +1,8 @@
-import { Col, DatePicker, Row, Select, Table } from 'antd'
+import { Button, Col, DatePicker, Row, Select, Table } from 'antd'
 import React from 'react'
 import './order.scss'
 import { Link } from "react-router-dom"
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons'
+import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
 import moment from "moment";
 
@@ -103,7 +103,20 @@ const Order = () => {
             dataIndex: "edit",
             key: "edit",
             render: (text) => (
-                <DeleteOutlined />
+                <Row align="middle" justify="center" gutter={["16", "0"]}>
+                    <Col>
+                        <Button>
+                            <EditOutlined />
+                        </Button>
+
+                    </Col>
+                    <Col>
+                        <Button>
+                            <DeleteOutlined />
+                        </Button>
+                    </Col>
+                </Row>
+
             )
 
 
