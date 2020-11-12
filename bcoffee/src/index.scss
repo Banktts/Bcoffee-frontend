@@ -5,40 +5,44 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
+}
   
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  .flex-row {
-    display: flex;
-    flex-direction: row;
-  }
-  .text-center {
-    text-align: center;
-  }
-  .text-left {
-    text-align: left;
-  }
-  .flex-center {
-    align-items: center;
-    justify-content: center;
-  }
-  .m-b-16 {
-    margin-bottom: 16;
-  }
-  .m-y-16 {
-    margin: 16px 0px;
-  }
-  .m-t-10 {
-    margin-top: 10px;
-  }
-  .m-r-10 {
-    margin-right: 10px;
-  }
-  .text-title {
-    font-size: 28px;
-    font-weight: 600;
-    color:  #846E61;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+.m-b-16 {
+  margin-bottom: 16;
+}
+.m-y-16 {
+  margin: 16px 0px;
+}
+.m-t-10 {
+  margin-top: 10px;
+}
+.m-r-10 {
+  margin-right: 10px;
+}
+.text-title {
+  font-size: 28px;
+  font-weight: 600;
+  color:  #846E61;
+}
+.text-normal {
+  font-size: 20px;
+  color:  #846E61;
 }
