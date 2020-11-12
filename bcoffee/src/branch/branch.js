@@ -9,14 +9,14 @@ import moment from "moment";
 const data = [
     {
         key: "1",
-        branchNo: "23",
+        branchId: "23",
         branchName: "Chula",
         topSpender: "mint, bam, amp",
         income: "2000000",
     },
     {
         key: "2",
-        branchNo: "23",
+        branchId: "23",
         branchName: "Chula",
         topSpender: "mint, bam, amp",
         income: "2000000",
@@ -57,9 +57,9 @@ const Branch = () => {
     const dateFormat = "DD/MM/YYYY";
     const columns = [
         {
-            title: "Branch No",
-            dataIndex: "branchNo",
-            key: "branchNo",
+            title: "BranchId",
+            dataIndex: "branchId",
+            key: "branchId",
         },
         {
             title: "Branch Name",

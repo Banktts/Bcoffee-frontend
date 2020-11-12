@@ -66,6 +66,11 @@ const Employee = () => {
 
     const columns = [
         {
+            title: "Employee Id",
+            dataIndex: "employeeId",
+            key: "employeeId",
+        },
+        {
             title: "Name",
             dataIndex: "name",
             key: "name",
@@ -81,7 +86,7 @@ const Employee = () => {
             key: "position",
         },
         {
-            title: "Birthdate",
+            title: "Birth Date",
             dataIndex: "birthdate",
             key: "birthdate",
         },

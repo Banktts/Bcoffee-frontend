@@ -9,7 +9,7 @@ import moment from "moment";
 const data = [
     {
         key: "1",
-        orderNo: "O001",
+        orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
         date: "DD/MM/YY",
@@ -18,7 +18,7 @@ const data = [
     },
     {
         key: "2",
-        orderNo: "O001",
+        orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
         date: "DD/MM/YY",
@@ -27,7 +27,7 @@ const data = [
     },
     {
         key: "3",
-        orderNo: "O001",
+        orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
         date: "DD/MM/YY",
@@ -36,7 +36,7 @@ const data = [
     },
     {
         key: "4",
-        orderNo: "O001",
+        orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
         date: "DD/MM/YY",
@@ -45,7 +45,7 @@ const data = [
     },
     {
         key: "5",
-        orderNo: "O001",
+        orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
         date: "DD/MM/YY",
@@ -61,9 +61,9 @@ const Order = () => {
     const dateFormat = "DD/MM/YYYY";
     const columns = [
         {
-            title: "Order No",
-            dataIndex: "orderNo",
-            key: "orderNo",
+            title: "Order Id",
+            dataIndex: "orderId",
+            key: "orderId",
         },
         {
             title: "CustomerId",
@@ -71,9 +71,14 @@ const Order = () => {
             key: "customerId",
         },
         {
-            title: "Branch Name",
-            dataIndex: "branchName",
-            key: "branchName",
+            title: "Branch Id",
+            dataIndex: "branchId",
+            key: "branchId",
+        },
+        {
+            title: "Employee Id",
+            dataIndex: "employeeId",
+            key: "employeeId",
         },
         {
             title: "Date",
