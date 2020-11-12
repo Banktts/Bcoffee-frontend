@@ -1,7 +1,7 @@
 import { Button, Col, DatePicker, Row, Select, Table } from 'antd'
 import React from 'react'
 import './order.scss'
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
 import moment from "moment";
@@ -59,6 +59,7 @@ const data = [
 
 const Order = () => {
     const dateFormat = "DD/MM/YYYY";
+    const history = useHistory()
     const columns = [
         {
             title: "Order Id",
@@ -128,6 +129,15 @@ const Order = () => {
 
     }
 
+    const handleClickRow = (record) => {
+        return {
+            onClick: () => {
+                history.push(`order/${record.orderId}`) //change 5 to orderId that record
+                console.log(record)
+            }
+        }
+    }
+
     return (
         <div className="order-container">
             <div className="text-title">
@@ -137,7 +147,7 @@ const Order = () => {
                 <Row justify="start" align="middle" gutter={["16", "0"]}>
                     <Col>
                         <Select defaultValue="all" onChange={handleChangeFilter} >
-                            <Option value="all">All</Option>
+                            <Select.Option value="all">All</Select.Option>
                         </Select>
                     </Col>
                     <Col>
@@ -149,7 +159,7 @@ const Order = () => {
                     <Link to="/order/make" className="text-link"><PlusOutlined /> Make an order</Link>
                 </div>
             </Row>
-            <Table dataSource={data} columns={columns} pagination={false} className="table" />
+            <Table dataSource={data} columns={columns} pagination={false} className="table" onRow={handleClickRow} />
         </div>
     )
 }
