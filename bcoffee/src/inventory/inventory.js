@@ -76,9 +76,9 @@ const Inventory = () => {
 
     const columns = [
         {
-            title: "Item No",
-            dataIndex: "itemNo",
-            key: "itemNo",
+            title: "Item Id",
+            dataIndex: "itemId",
+            key: "itemId",
         },
         {
             title: "Type",
@@ -86,9 +86,9 @@ const Inventory = () => {
             key: "type",
         },
         {
-            title: "Branch No",
-            dataIndex: "branchNo",
-            key: "branchNo",
+            title: "Branch Id",
+            dataIndex: "branchId",
+            key: "branchId",
         },
         {
             title: "Amount",

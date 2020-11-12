@@ -24,9 +24,12 @@ const Bar = () => {
                     <Link to="/menu">Menu</Link>
                 </Menu.Item>
                 <Menu.Item key="3" >
-                    <Link to="/employee">Employee</Link>
+                    <Link to="/customer">Customer</Link>
                 </Menu.Item>
                 <Menu.Item key="4" >
+                    <Link to="/employee">Employee</Link>
+                </Menu.Item>
+                <Menu.Item key="5" >
                     <Link to="/branch">Branch</Link>
                 </Menu.Item>
             </Menu>

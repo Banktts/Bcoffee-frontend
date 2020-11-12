@@ -71,14 +71,14 @@ const Menu = () => {
             key: "imgUrl",
         },
         {
-            title: "Menu No",
-            dataIndex: "menuNo",
-            key: "menuNo",
+            title: "Menu Id",
+            dataIndex: "menuId",
+            key: "menuId",
         },
         {
-            title: "Menu Name",
-            dataIndex: "menuName",
-            key: "menuName",
+            title: "Name",
+            dataIndex: "name",
+            key: "name",
         },
         {
             title: "Type",
