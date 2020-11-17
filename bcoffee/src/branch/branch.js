@@ -76,27 +76,27 @@ const Branch = () => {
             dataIndex: "income",
             key: "income",
         },
-        {
-            title: "",
-            dataIndex: "edit",
-            key: "edit",
-            render: (text) => (
-                <Row align="middle" justify="center" gutter={["16", "0"]}>
-                    <Col>
-                        <Button>
-                            <EditOutlined />
-                        </Button>
+        // {
+        //     title: "",
+        //     dataIndex: "edit",
+        //     key: "edit",
+        //     render: (text) => (
+        //         <Row align="middle" justify="center" gutter={["16", "0"]}>
+        //             <Col>
+        //                 <Button>
+        //                     <EditOutlined />
+        //                 </Button>
 
-                    </Col>
-                    <Col>
-                        <Button>
-                            <DeleteOutlined />
-                        </Button>
-                    </Col>
-                </Row>
+        //             </Col>
+        //             <Col>
+        //                 <Button>
+        //                     <DeleteOutlined />
+        //                 </Button>
+        //             </Col>
+        //         </Row>
 
-            )
-        }
+        //     )
+        // }
     ]
 
     const handleChangeFilter = (e) => {
@@ -112,29 +112,24 @@ const Branch = () => {
             <div className="text-title">
                 Branch
             </div>
-            <Row justify="space-between" align="middle" className="m-y-16">
-                <Row justify="start" align="middle" gutter={["16", "0"]}>
-                    <Col>
-                        <Select defaultValue="all" onChange={handleChangeFilter} >
-                            <Option value="all">All</Option>
-                        </Select>
-                    </Col>
-                    <Col>
-                        <DatePicker onChange={handleChangeDate} defaultValue={moment()} format={dateFormat} />
-                    </Col>
-                </Row>
+            {/* <Row justify="space-between" align="middle" className="m-y-16">
+                <Row justify="start" align="middle" gutter={["16", "0"]}> */}
+
+            <div className="m-y-16">
+                <DatePicker onChange={handleChangeDate} defaultValue={moment()} format={dateFormat} />
+            </div>
+            {/* </Row>
 
                 <div className="link-button">
                     <Link to="/order/make" className="text-link"><PlusOutlined /> Add Branch</Link>
                 </div>
-            </Row>
+            </Row> */}
             <Table dataSource={data} columns={columns} pagination={false} className="table" summary={() => (
                 <Table.Summary.Row>
                     <Table.Summary.Cell >All</Table.Summary.Cell>
                     <Table.Summary.Cell ></Table.Summary.Cell>
                     <Table.Summary.Cell >xxxxxx</Table.Summary.Cell>
                     <Table.Summary.Cell >xxxxxx</Table.Summary.Cell>
-                    <Table.Summary.Cell ></Table.Summary.Cell>
                 </Table.Summary.Row>
 
             )} />

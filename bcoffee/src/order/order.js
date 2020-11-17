@@ -96,29 +96,27 @@ const Order = () => {
             dataIndex: "totalPrice",
             key: "totalPrice",
         },
-        {
-            title: "",
-            dataIndex: "edit",
-            key: "edit",
-            render: (text) => (
-                <Row align="middle" justify="center" gutter={["16", "0"]}>
-                    <Col>
-                        <Button>
-                            <EditOutlined />
-                        </Button>
+        // {
+        //     title: "",
+        //     dataIndex: "edit",
+        //     key: "edit",
+        //     render: (text) => (
+        //         <Row align="middle" justify="center" gutter={["16", "0"]}>
+        //             <Col>
+        //                 <Button>
+        //                     <EditOutlined />
+        //                 </Button>
 
-                    </Col>
-                    <Col>
-                        <Button>
-                            <DeleteOutlined />
-                        </Button>
-                    </Col>
-                </Row>
+        //             </Col>
+        //             <Col>
+        //                 <Button>
+        //                     <DeleteOutlined />
+        //                 </Button>
+        //             </Col>
+        //         </Row>
 
-            )
-
-
-        }
+        //     )
+        // }
     ]
 
     const handleChangeFilter = (e) => {

@@ -1,5 +1,6 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button, Col, Row, Select, Table } from 'antd'
+import Search from 'antd/lib/input/Search'
 import { Option } from 'antd/lib/mentions'
 import { Link } from "react-router-dom"
 import './customer.scss'
@@ -95,30 +96,34 @@ const Customer = () => {
             dataIndex: "totalPrice",
             key: "totalPrice",
         },
-        {
-            title: "",
-            dataIndex: "edit",
-            key: "edit",
-            render: (text) => (
-                <Row align="middle" justify="center" gutter={["16", "0"]}>
-                    <Col>
-                        <Button>
-                            <EditOutlined />
-                        </Button>
+        // {
+        //     title: "",
+        //     dataIndex: "edit",
+        //     key: "edit",
+        //     render: (text) => (
+        //         <Row align="middle" justify="center" gutter={["16", "0"]}>
+        //             <Col>
+        //                 <Button>
+        //                     <EditOutlined />
+        //                 </Button>
 
-                    </Col>
-                    <Col>
-                        <Button>
-                            <DeleteOutlined />
-                        </Button>
-                    </Col>
-                </Row>
+        //             </Col>
+        //             <Col>
+        //                 <Button>
+        //                     <DeleteOutlined />
+        //                 </Button>
+        //             </Col>
+        //         </Row>
 
-            )
+        //     )
 
 
-        }
+        // }
     ]
+
+    const handleSearch = (e) => {
+
+    }
 
     return (
         <div className="customer-container">
@@ -127,9 +132,12 @@ const Customer = () => {
             </div>
             <Row justify="space-between" align="middle" className="m-y-16">
                 <Col>
-                    <Select defaultValue="all" onChange={handleChangeFilter} >
-                        <Option value="all">All</Option>
-                    </Select>
+                    <Search
+                        placeholder="Customer Id"
+                        onSearch={(e) => {
+                            handleSearch(e);
+                        }}
+                    />
                 </Col>
                 <div className="link-button">
                     <Link to="/customer/add" className="text-link"><PlusOutlined /> Add Customer</Link>
