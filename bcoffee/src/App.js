@@ -8,6 +8,7 @@ import Menu from './menu/menu'
 import Branch from './branch/branch'
 import MakeOrder from './order/makeOrder'
 import Customer from './customer/customer'
+import CustomerAdd from './customer/customerAdd'
 
 const App = () => {
   const history = useHistory();
@@ -34,6 +35,7 @@ const App = () => {
           <Route exact path="/branch" component={Branch} />
           <Route exact path="/order/make" component={MakeOrder} />
           <Route exact path="/customer" component={Customer} />
+          <Route exact path="/customer/add" component={CustomerAdd} />
         </Switch>
       </div>
     </Router>
