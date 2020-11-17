@@ -140,9 +140,9 @@ const Employee = () => {
                         <Option value="all">All</Option>
                     </Select>
                 </Col>
-                <div className="link-button">
+                {/* <div className="link-button">
                     <Link to="/order/make" className="text-link"><PlusOutlined /> Add Employee</Link>
-                </div>
+                </div> */}
             </Row>
 
             <Table dataSource={data} columns={columns} pagination={false} className="table" />

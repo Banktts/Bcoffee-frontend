@@ -5,7 +5,7 @@
         color: #846E61;
         font-size: 16px;
         font-weight: 600;
-        width: 12%;
+        width: 14%;
         background: #f2f3f7;
     }
     .ant-table-tbody {
@@ -46,14 +46,40 @@
     .ant-select-open {
         background-color: #846E61;
     }
-    .ant-btn {
-        border: none;
-        box-shadow: none;
-        border-radius: 6px;
-        color: #846E61;
-        &:hover, :focus, :active {
-            box-shadow: 0 0 0 3px #cfcfcf;
-            color: black;
+    // .ant-btn {
+    //     border: none;
+    //     box-shadow: none;
+    //     border-radius: 6px;
+    //     color: #846E61;
+    //     &:hover, :focus, :active {
+    //         box-shadow: 0 0 0 3px #cfcfcf;
+    //         color: black;
+    //     }
+    // }
+    .ant-btn-icon-only {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        margin: 0;
+        &:hover, :focus {
+            border-color: #846E61;
         }
+    }
+    .ant-input-search .ant-input {
+        &:hover, &:focus {
+        border-color: #846E61;
+        box-shadow: none;
+        }
+    }
+    .ant-input-search-button:focus, .ant-input-search .ant-input:focus + .ant-input-group-addon .ant-input-search-button:not(.ant-btn-primary)  {
+        border-color: #846E61;
+    }
+    .ant-input-search .ant-input:focus {
+        border-color: #846E61;
+        box-shadow: none;
+    }
+    .ant-input-group .ant-input {
+        height: 32px;
     }
 }
