@@ -16,11 +16,7 @@ const CustomerAdd = () => {
     };
 
     const handleOk = () => {
-        setConfirmLoading(true);
-        setTimeout(() => {
-            setVisible(false);
-            setConfirmLoading(true);
-        }, 2000);
+        
     };
 
     const handleCancel = () => {
@@ -49,13 +45,13 @@ const CustomerAdd = () => {
                     layout="vertical"
                     onFinish={submitForm}
                 >
-                    <CustomInput name="customerId" label="Customer Id" />
-                    <CustomInput name="customerName" label="Customer Name" />
+                    <CustomInput name="customerId" label="Customer Id" rule="required"/>
+                    <CustomInput name="customerName" label="Customer Name" rule="required"/>
                     <CustomInput name="ssn" label="ID card number" rule="required" />
                     <CustomSelect name="gender" label="Gender" values={gender} rule="required" />
-                    <CustomDatepicker name="birthday" label="Birth date" />
-                    <CustomInput name="memberPoint" label="Member Point" />
-                    <CustomInput name="phone" label="Phone Number" rule="phoneRequired" />
+                    <CustomDatepicker name="birthday" label="Birth date" rule="required"/>
+                    <CustomInput name="memberPoint" label="Member Point" rule="required"/>
+                    <CustomInput name="phone" label="Phone Number" rule="phoneRequired" rule="required"/>
                     <Button type="primary" htmlType="submit"  > Add Customer</Button>
                 </Form>
                 <Modal

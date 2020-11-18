@@ -6,7 +6,7 @@ export const CustomDatepicker = (props) => {
    
  
     return (
-        <Form.Item name={props.name}  label={props.label+" :"}  >
+        <Form.Item name={props.name}  label={props.label+" :"} rules={[ruleError(props.rule)]} >
         <DatePicker style={{width:"200px"}} format='DD/MM/YY'/>
       </Form.Item>
 
