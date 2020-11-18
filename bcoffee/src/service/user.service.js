@@ -82,10 +82,12 @@ export const deleteMenu = async (branchId) => {
     }
 }
 //bank
-export const addCustomer = async (branchId) => {
+export const addCustomer = async (values) => {
     try {
-        // return await axios.post()
+        let res = await axios.post(URL+'/addcustomer',values)
+        return res.data
     } catch (err) {
         throw err
+        return false
     }
 }
