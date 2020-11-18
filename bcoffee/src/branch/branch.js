@@ -1,10 +1,11 @@
 import { Button, Col, DatePicker, Row, Select, Table } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './branch.scss'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
 import moment from "moment";
+import { getBranch } from '../service/user.service'
 
 const data = [
     {
@@ -54,17 +55,33 @@ const data = [
 //topspender: show top three name of customer 
 
 const Branch = () => {
-    const dateFormat = "DD/MM/YYYY";
+    const dateFormat = "DD-MM-YYYY";
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        branch()
+    }, [])
+
+    const branch = async () => {
+        try {
+            const res = await getBranch()
+            setData(res.data)
+            console.log(res.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const columns = [
         {
             title: "BranchId",
-            dataIndex: "branchId",
-            key: "branchId",
+            dataIndex: "branch_id",
+            key: "branch_id",
         },
         {
             title: "Branch Name",
-            dataIndex: "branchName",
-            key: "branchName",
+            dataIndex: "street",
+            key: "street",
         },
         {
             title: "Top Spender",
@@ -76,32 +93,7 @@ const Branch = () => {
             dataIndex: "income",
             key: "income",
         },
-        // {
-        //     title: "",
-        //     dataIndex: "edit",
-        //     key: "edit",
-        //     render: (text) => (
-        //         <Row align="middle" justify="center" gutter={["16", "0"]}>
-        //             <Col>
-        //                 <Button>
-        //                     <EditOutlined />
-        //                 </Button>
-
-        //             </Col>
-        //             <Col>
-        //                 <Button>
-        //                     <DeleteOutlined />
-        //                 </Button>
-        //             </Col>
-        //         </Row>
-
-        //     )
-        // }
     ]
-
-    const handleChangeFilter = (e) => {
-
-    }
 
     const handleChangeDate = (e) => {
 
