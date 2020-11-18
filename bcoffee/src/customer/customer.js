@@ -1,8 +1,11 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons'
+import { DeleteOutlined, EditOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons'
 import { Button, Col, Row, Select, Table } from 'antd'
+import Search from 'antd/lib/input/Search'
 import { Option } from 'antd/lib/mentions'
+import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import './customer.scss'
+// import { getCustomer } from '../service/user.service'
 
 const data = [
     {
@@ -10,7 +13,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -19,7 +22,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -28,7 +31,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -37,7 +40,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -46,18 +49,30 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
 
 ]
 
-const handleChangeFilter = (e) => {
-
-}
-
 const Customer = () => {
+    const [name, setName] = useState("")
+    const [data, setData] = useState([])
+
+    // useEffect(() => {
+    //     customer(name)
+    // })
+
+    // const customer = async (name) => {
+    //     try {
+    //         const res = await getCustomer(name)
+    //         setData(res.data)
+    //         console.log(res.data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     const columns = [
         {
@@ -95,30 +110,35 @@ const Customer = () => {
             dataIndex: "totalPrice",
             key: "totalPrice",
         },
-        {
-            title: "",
-            dataIndex: "edit",
-            key: "edit",
-            render: (text) => (
-                <Row align="middle" justify="center" gutter={["16", "0"]}>
-                    <Col>
-                        <Button>
-                            <EditOutlined />
-                        </Button>
+        // {
+        //     title: "",
+        //     dataIndex: "edit",
+        //     key: "edit",
+        //     render: (text) => (
+        //         <Row align="middle" justify="center" gutter={["16", "0"]}>
+        //             <Col>
+        //                 <Button>
+        //                     <EditOutlined />
+        //                 </Button>
 
-                    </Col>
-                    <Col>
-                        <Button>
-                            <DeleteOutlined />
-                        </Button>
-                    </Col>
-                </Row>
+        //             </Col>
+        //             <Col>
+        //                 <Button>
+        //                     <DeleteOutlined />
+        //                 </Button>
+        //             </Col>
+        //         </Row>
 
-            )
+        //     )
 
 
-        }
+        // }
     ]
+
+    const handleSearch = (e) => {
+        setName(e)
+        // customer(name)
+    }
 
     return (
         <div className="customer-container">
@@ -127,9 +147,12 @@ const Customer = () => {
             </div>
             <Row justify="space-between" align="middle" className="m-y-16">
                 <Col>
-                    <Select defaultValue="all" onChange={handleChangeFilter} >
-                        <Option value="all">All</Option>
-                    </Select>
+                    <Search
+                        placeholder="Customer Id"
+                        onSearch={(e) => {
+                            handleSearch(e);
+                        }}
+                    />
                 </Col>
                 <div className="link-button">
                     <Link to="/customer/add" className="text-link"><PlusOutlined /> Add Customer</Link>

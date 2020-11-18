@@ -8,6 +8,7 @@ import Menu from './menu/menu'
 import Branch from './branch/branch'
 import MakeOrder from './order/makeOrder'
 import Customer from './customer/customer'
+import OrderLine from './order/orderLine'
 import CustomerAdd from './customer/customerAdd'
 
 const App = () => {
@@ -18,7 +19,6 @@ const App = () => {
     if (path === "/") {
       return false;
     }
-    console.log("not path /");
     return true;
   };
 
@@ -27,14 +27,16 @@ const App = () => {
       <div className="flex flex-row">
         {checkPath(location.pathname) ? <Bar /> : null}
         <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/order" component={Order} />
-          <Route exact path="/employee" component={Employee} />
-          <Route exact path="/inventory" component={Inventory} />
-          <Route exact path="/menu" component={Menu} />
-          <Route exact path="/branch" component={Branch} />
-          <Route exact path="/order/make" component={MakeOrder} />
-          <Route exact path="/customer" component={Customer} />
+          <Route exact key="login" path="/" component={Login} />
+          <Route exact key="order" path="/order" component={Order} />
+          <Route exact key="employee" path="/employee" component={Employee} />
+          <Route exact key="employee-add" path="/employee/add" component={Employee} />
+          <Route exact key="inventory" path="/inventory" component={Inventory} />
+          <Route exact key="menu" path="/menu" component={Menu} />
+          <Route exact key="branch" path="/branch" component={Branch} />
+          <Route exact key="order-make" path="/order/make" component={MakeOrder} />
+          <Route exact key="order-line" path={`/order/:orderId`} component={OrderLine} />
+          <Route exact key="customer" path="/customer" component={Customer} />
           <Route exact path="/customer/add" component={CustomerAdd} />
         </Switch>
       </div>
