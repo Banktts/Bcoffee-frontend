@@ -26,7 +26,7 @@ const MakeOrder = () => {
     return (
         <div className="make-order-container">
             <div className="text-title">
-                Make an Order
+                Place Order
             </div>
             <Row className="h-100">
                 <Col flex={2}>

@@ -1,10 +1,11 @@
 import { Button, Col, DatePicker, Row, Select, Table } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './order.scss'
 import { Link, useHistory } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
 import moment from "moment";
+import { getBranch, getOrder } from '../service/user.service'
 
 const data = [
     {
@@ -12,7 +13,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -21,7 +22,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -30,7 +31,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -39,7 +40,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -48,18 +49,46 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD/-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
 
 ]
 
-
-
 const Order = () => {
-    const dateFormat = "DD/MM/YYYY";
+    const dateFormat = "DD-MM-YYYY";
     const history = useHistory()
+    const [data, setData] = useState([])
+    const [branchList, setBranchList] = useState([])
+    const [branchId, setBranchId] = useState("all")
+    const [date, setDate] = useState(moment().format(dateFormat))
+
+    useEffect(() => {
+        order(branchId, date)
+        branchData()
+    }, [])
+
+    const order = async (branchId, date) => {
+        try {
+            const res = await getOrder(branchId, date)
+            setData(res.data)
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const branchData = async () => {
+        try {
+            const resBranch = await getBranch()
+            console.log(resBranch.data)
+            setBranchList(resBranch.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const columns = [
         {
             title: "Order Id",
@@ -119,12 +148,13 @@ const Order = () => {
         // }
     ]
 
-    const handleChangeFilter = (e) => {
-
+    const handleChangeBranch = (e) => {
+        setBranchId(e) //branch id
+        order(e)
     }
 
     const handleChangeDate = (e) => {
-
+        console.log(e)
     }
 
     const handleClickRow = (record) => {
@@ -144,8 +174,13 @@ const Order = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
                 <Row justify="start" align="middle" gutter={["16", "0"]}>
                     <Col>
-                        <Select defaultValue="all" onChange={handleChangeFilter} >
-                            <Select.Option value="all">All</Select.Option>
+                        <Select defaultValue="all" onChange={handleChangeBranch} >
+                            <Option value="all" key="all">All</Option>
+                            {branchList.map((a) => (
+                                <Option value={a.branch_id} key={a.branch_id}>
+                                    {a.street}
+                                </Option>
+                            ))}
                         </Select>
                     </Col>
                     <Col>
@@ -154,7 +189,7 @@ const Order = () => {
                 </Row>
 
                 <div className="link-button">
-                    <Link to="/order/make" className="text-link"><PlusOutlined /> Make an order</Link>
+                    <Link to="/order/make" className="text-link"><PlusOutlined /> Place Order</Link>
                 </div>
             </Row>
             <Table dataSource={data} columns={columns} pagination={false} className="table" onRow={handleClickRow} />

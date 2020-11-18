@@ -2,8 +2,10 @@ import { DeleteOutlined, EditOutlined, PlusOutlined, SearchOutlined } from '@ant
 import { Button, Col, Row, Select, Table } from 'antd'
 import Search from 'antd/lib/input/Search'
 import { Option } from 'antd/lib/mentions'
+import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import './customer.scss'
+// import { getCustomer } from '../service/user.service'
 
 const data = [
     {
@@ -11,7 +13,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -20,7 +22,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -29,7 +31,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -38,7 +40,7 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
@@ -47,18 +49,30 @@ const data = [
         orderId: "O001",
         customerId: "C002",
         branchName: "Chula",
-        date: "DD/MM/YY",
+        date: "DD-MM-YYYY",
         time: "HH:MM",
         totalPrice: "30000"
     },
 
 ]
 
-const handleChangeFilter = (e) => {
-
-}
-
 const Customer = () => {
+    const [name, setName] = useState("")
+    const [data, setData] = useState([])
+
+    // useEffect(() => {
+    //     customer(name)
+    // })
+
+    // const customer = async (name) => {
+    //     try {
+    //         const res = await getCustomer(name)
+    //         setData(res.data)
+    //         console.log(res.data)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
 
     const columns = [
         {
@@ -122,7 +136,8 @@ const Customer = () => {
     ]
 
     const handleSearch = (e) => {
-
+        setName(e)
+        // customer(name)
     }
 
     return (

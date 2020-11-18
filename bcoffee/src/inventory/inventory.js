@@ -1,9 +1,10 @@
 import './inventory.scss'
 import { Button, Col, Row, Select, Table } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
+import { getBranch, getInventory } from '../service/user.service'
 
 const data = [
     {
@@ -73,22 +74,50 @@ const data = [
 ]
 
 const Inventory = () => {
+    const [branchList, setBranchList] = useState([])
+    const [branchId, setBranchId] = useState("all")
+    const [data, setData] = useState([])
+
+    useEffect(() => {
+        inventory(branchId)
+        branchData()
+    }, [])
+
+    const inventory = async (branchId) => {
+        try {
+            const res = await getInventory(branchId)
+            setData(res.data)
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const branchData = async () => {
+        try {
+            const resBranch = await getBranch()
+            console.log(resBranch.data)
+            setBranchList(resBranch.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const columns = [
         {
             title: "Item Id",
-            dataIndex: "itemId",
-            key: "itemId",
+            dataIndex: "item_id",
+            key: "item_id",
         },
         {
             title: "Type",
-            dataIndex: "type",
-            key: "type",
+            dataIndex: "name",
+            key: "name",
         },
         {
             title: "Branch Id",
-            dataIndex: "branchId",
-            key: "branchId",
+            dataIndex: "branch_id",
+            key: "branch_id",
         },
         {
             title: "Amount",
@@ -122,8 +151,10 @@ const Inventory = () => {
         }
     ]
 
-    const handleChangeFilter = (e) => {
-
+    const handleChangeBranch = (e) => {
+        setBranchId(e)
+        console.log(e)
+        inventory(e)
     }
 
     return (
@@ -134,8 +165,13 @@ const Inventory = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
 
                 <Col>
-                    <Select defaultValue="all" onChange={handleChangeFilter} >
-                        <Option value="all">All</Option>
+                    <Select defaultValue="all" onChange={handleChangeBranch} >
+                        <Option value="all" key="all">All</Option>
+                        {branchList.map((a) => (
+                            <Option value={a.branch_id} key={a.branch_id}>
+                                {a.street}
+                            </Option>
+                        ))}
                     </Select>
                 </Col>
                 {/* <div className="link-button">

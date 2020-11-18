@@ -16,7 +16,7 @@
     }
     .card:hover {
         box-shadow: rgba(2, 8, 20, 0.1) 0 0.2rem 1rem;
-        transform: scale(1.5);
+        transform: scale(1.03);
     }
     .box-cart {
         border-radius: 6px;
@@ -48,8 +48,8 @@
         color: black;
     }
     .custom-img {
-        height: 250px;
-        width: 215px;
+        height: 100%;
+        width: 100%;
     }
     .ant-divider-horizontal {
         margin: 15px 0;

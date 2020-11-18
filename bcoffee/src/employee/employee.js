@@ -1,74 +1,103 @@
 import { Button, Col, Row, Select, Table } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './employee.scss'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
+import { getBranch, getEmployee } from '../service/user.service'
 
-const data = [
-    {
-        key: "1",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
-    },
-    {
-        key: "2",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
-    },
-    {
-        key: "3",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
-    },
-    {
-        key: "4",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
-    },
-    {
-        key: "5",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
-    },
-    {
-        key: "6",
-        name: "Chaninart",
-        gender: "Female",
-        position: "Manager",
-        birthdate: "xx/xx/xx",
-        startDate: "xx/xx/xx",
-        salary: "30000"
-    }
-]
+// const data = [
+//     {
+//         key: "1",
+//         name: "Chaninart",
+//         gender: "Female",
+//         position: "Manager",
+//         birthdate: "xx/xx/xx",
+//         startDate: "xx/xx/xx",
+//         salary: "30000"
+//     },
+//     {
+//         key: "2",
+//         name: "Chaninart",
+//         gender: "Female",
+//         position: "Manager",
+//         birthdate: "xx/xx/xx",
+//         startDate: "xx/xx/xx",
+//         salary: "30000"
+//     },
+//     {
+//         key: "3",
+//         name: "Chaninart",
+//         gender: "Female",
+//         position: "Manager",
+//         birthdate: "xx/xx/xx",
+//         startDate: "xx/xx/xx",
+//         salary: "30000"
+//     },
+//     {
+//         key: "4",
+//         name: "Chaninart",
+//         gender: "Female",
+//         position: "Manager",
+//         birthdate: "xx/xx/xx",
+//         startDate: "xx/xx/xx",
+//         salary: "30000"
+//     },
+//     {
+//         key: "5",
+//         name: "Chaninart",
+//         gender: "Female",
+//         position: "Manager",
+//         birthdate: "xx/xx/xx",
+//         startDate: "xx/xx/xx",
+//         salary: "30000"
+//     },
+//     {
+//         key: "6",
+//         name: "Chaninart",
+//         gender: "Female",
+//         position: "Manager",
+//         birthdate: "xx/xx/xx",
+//         startDate: "xx/xx/xx",
+//         salary: "30000"
+//     }
+// ]
 
 const Employee = () => {
+    const [data, setData] = useState([])
+    const [branchList, setBranchList] = useState([])
+    const [branchId, setBranchId] = useState("all")
+
+    useEffect(() => {
+        employee(branchId)
+        branchData()
+    }, [])
+
+    const employee = async (branchId) => {
+        try {
+            const res = await getEmployee(branchId)
+            setData(res.data)
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const branchData = async () => {
+        try {
+            const resBranch = await getBranch()
+            console.log(resBranch.data)
+            setBranchList(resBranch.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const columns = [
         {
             title: "Employee Id",
-            dataIndex: "employeeId",
-            key: "employeeId",
+            dataIndex: "emp_id",
+            key: "emp_id",
         },
         {
             title: "Name",
@@ -77,8 +106,8 @@ const Employee = () => {
         },
         {
             title: "Gender",
-            dataIndex: "gender",
-            key: "gender",
+            dataIndex: "sex",
+            key: "sex",
         },
         {
             title: "Position",
@@ -124,8 +153,10 @@ const Employee = () => {
         }
     ]
 
-    const handleChangeFilter = () => {
-
+    const handleChangeBranch = (e) => {
+        setBranchId(e) //branch id
+        console.log(e)
+        employee(e)
     }
 
     return (
@@ -136,8 +167,13 @@ const Employee = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
 
                 <Col>
-                    <Select defaultValue="all" onChange={handleChangeFilter} >
-                        <Option value="all">All</Option>
+                    <Select defaultValue="all" onChange={handleChangeBranch} >
+                        <Option value="all" key="all">All</Option>
+                        {branchList.map((a) => (
+                            <Option value={a.branch_id} key={a.branch_id}>
+                                {a.street}
+                            </Option>
+                        ))}
                     </Select>
                 </Col>
                 {/* <div className="link-button">
