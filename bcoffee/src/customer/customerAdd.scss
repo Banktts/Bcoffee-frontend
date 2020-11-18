@@ -1,0 +1,38 @@
+
+.container{
+    margin-left:60px;
+    margin-right:20px;
+    margin-top:40px;
+    
+   
+    
+    
+    .text-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: #846E61;
+        }
+    
+}
+.atn-btn-primary{
+    background-color: #846E61;
+   
+}
+
+.ant-btn-primary {
+    color: #fff;
+    background:  #846E61;
+    border-color:  #846E61;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+    &:hover  {
+        background: #bb9680;
+        border-color:   #bb9680;
+    }
+    &:focus  {
+        background: #bb9680;
+        border-color: #bb9680;
+    }
+}
