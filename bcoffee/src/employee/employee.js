@@ -1,5 +1,6 @@
-import { Button, Col, Row, Select, Table } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Button, Col, Row, Select, Table,Form,Modal } from 'antd'
+import React, { useEffect, useState, useCallback } from 'react'
+import { CustomInput } from '../component/customInput'
 import './employee.scss'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
@@ -67,7 +68,10 @@ const Employee = () => {
     const [data, setData] = useState([])
     const [branchList, setBranchList] = useState([])
     const [branchId, setBranchId] = useState("all")
-
+    const [visible, setVisible] = useState(false)
+    const [form] = Form.useForm();
+    const [position, setPosition] = useState();
+    const [currentEmployee,setCurrentEmployee]=useState();
     useEffect(() => {
         employee(branchId)
         branchData()
@@ -159,6 +163,32 @@ const Employee = () => {
         employee(e)
     }
 
+    const showModal = () => {
+        setVisible(true)
+
+    };
+
+    const handleOk = e => {
+        console.log(e);
+        setVisible(false)
+    };
+
+    const handleCancel = e => {
+        console.log(e);
+        setVisible(false)
+    };
+    const submitForm = useCallback(
+        (position) => {
+            console.log(position)
+            console.log(currentEmployee)
+            /// patch api
+            setPosition(position.position)
+            handleOk()
+
+        },
+        [position,currentEmployee]
+    )
+
     return (
         <div className="employee-container">
             <div className="text-title">
@@ -180,6 +210,35 @@ const Employee = () => {
                     <Link to="/order/make" className="text-link"><PlusOutlined /> Add Employee</Link>
                 </div> */}
             </Row>
+            <Button type="primary" onClick={showModal}>
+                Open Modal
+        </Button>
+
+            <Modal
+                
+                title="Edit position of employee."
+                visible={visible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                footer={[]}
+            >
+                <Form
+
+                    form={form}
+                    layout="horizontal"
+                    onFinish={submitForm}
+                >
+                    <CustomInput  name="position" label="Position" rule="required" />
+                    <Row justify="center" gutter={{ xs: 9}}> 
+                        <Col span={7}><Button type="primary" htmlType="submit"  onClick={()=>setCurrentEmployee("EmployeeName")} >Submit</Button></Col>
+                        <Col span={6}><Button key="back" onClick={handleCancel}>
+                       Cancel
+                    </Button></Col>
+                    </Row>
+                    
+                    
+                </Form>
+            </Modal>
 
             <Table dataSource={data} columns={columns} pagination={false} className="table" />
         </div>

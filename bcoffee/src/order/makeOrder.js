@@ -1,7 +1,7 @@
 import './makeOrder.scss'
-import { Row, Col, Divider, Button, InputNumber } from 'antd'
+import { Row, Col, Divider, Button, InputNumber,Modal } from 'antd'
 import { useHistory } from "react-router-dom";
-
+import {  ExclamationCircleOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 const data = {
     name: "Cocoa",
     price: "$10",
@@ -9,7 +9,7 @@ const data = {
 }
 
 //total operate in this method
-
+const { confirm} = Modal;
 const MakeOrder = () => {
     let total = 0
     const history = useHistory()
@@ -17,12 +17,25 @@ const MakeOrder = () => {
 
     }
     const handleClickCheckout = (e) => {
-        history.push("/order")
+        showConfirm()
+       
     }
     const handleClickCancel = (e) => {
         history.push("/order")
     }
-
+    function showConfirm() {
+        confirm({
+            title: 'Confirm checkout order?',
+            icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
+            
+            onOk() {
+                history.push("/order")
+            },
+            onCancel() {
+                console.log('Cancel');
+            },
+        });
+    }
     return (
         <div className="make-order-container">
             <div className="text-title">

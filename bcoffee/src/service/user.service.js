@@ -85,9 +85,10 @@ export const deleteMenu = async (branchId) => {
 export const addCustomer = async (values) => {
     try {
         let res = await axios.post(URL+'/addcustomer',values)
+        console.log(res.false)
         return res.data
     } catch (err) {
-        throw err
+        
         return false
     }
 }
