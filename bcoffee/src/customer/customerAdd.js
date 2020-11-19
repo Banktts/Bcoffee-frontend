@@ -1,11 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { Modal, Form, Input, Button } from 'antd'
+import React, { useState, useCallback } from 'react';
+import { Modal, Form,  Button } from 'antd'
 import { CustomInput } from '../component/customInput'
 import { CustomSelect } from '../component/customSelect'
 import { CustomDatepicker } from '../component/customDatepicker'
 import { addCustomer } from './../service/user.service'
 import { useHistory } from "react-router-dom";
-import { AlertTwoTone, ExclamationCircleOutlined, CheckCircleTwoTone, WarningTwoTone } from '@ant-design/icons';
+import {  ExclamationCircleOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 import './customerAdd.scss'
 const CustomerAdd = () => {
     const history = useHistory();

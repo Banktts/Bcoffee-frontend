@@ -1,6 +1,7 @@
 import './inventory.scss'
-import { Button, Col, Row, Select, Table } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Button, Col, Row, Select, Table, Modal, Form } from 'antd'
+import React, { useEffect, useState, useCallback } from 'react'
+import { CustomInput } from '../component/customInput'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
@@ -77,7 +78,9 @@ const Inventory = () => {
     const [branchList, setBranchList] = useState([])
     const [branchId, setBranchId] = useState("all")
     const [data, setData] = useState([])
-
+    const [visible, setVisible] = useState(false)
+    const [amount, setAmount] = useState();
+    const [currentBranch,setCurrentBranch]=useState();
     useEffect(() => {
         inventory(branchId)
         branchData()
@@ -156,7 +159,33 @@ const Inventory = () => {
         console.log(e)
         inventory(e)
     }
+    const showModal = () => {
+        setVisible(true)
 
+    };
+
+    const handleOk = e => {
+        console.log(e);
+        setVisible(false)
+    };
+
+    const handleCancel = e => {
+        console.log(e);
+        setVisible(false)
+    };
+    const submitForm = useCallback(
+        (amount) => {
+            console.log(amount)
+            console.log(currentBranch)
+            /// patch api
+            setAmount(amount.amount)
+            handleOk()
+
+        },
+        [amount,currentBranch]
+    )
+
+    const [form] = Form.useForm();
     return (
         <div className="inventory-container">
             <div className="text-title">
@@ -178,6 +207,35 @@ const Inventory = () => {
                     <Link to="/order/make" className="text-link"><PlusOutlined /> Add Inventory</Link>
                 </div> */}
             </Row>
+            <Button type="primary" onClick={showModal}>
+                Open Modal
+        </Button>
+
+            <Modal
+                
+                title="Edit amount of item."
+                visible={visible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                footer={[]}
+            >
+                <Form
+
+                    form={form}
+                    layout="horizontal"
+                    onFinish={submitForm}
+                >
+                    <CustomInput  name="amount" label="Amount" rule="required" />
+                    <Row justify="center" gutter={{ xs: 9}}> 
+                        <Col span={7}><Button type="primary" htmlType="submit"  onClick={()=>setCurrentBranch("branchName")} > Submit</Button></Col>
+                        <Col span={6}><Button key="back" onClick={handleCancel}>
+                       Cancel
+                    </Button></Col>
+                    </Row>
+                    
+                    
+                </Form>
+            </Modal>
 
             <Table dataSource={data} columns={columns} pagination={false} className="table" />
         </div>
