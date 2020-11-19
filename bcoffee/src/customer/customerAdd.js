@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Modal, Form, Input, Button } from 'antd'
 import { CustomInput } from '../component/customInput'
 import { CustomSelect } from '../component/customSelect'
+import { showConfirm } from '../component/customModal'
 import { CustomDatepicker } from '../component/customDatepicker'
 import { addCustomer } from './../service/user.service'
 import { useHistory } from "react-router-dom";
@@ -13,14 +14,37 @@ const CustomerAdd = () => {
     const [visible, setVisible] = useState(false);
     const [confirmLoading, setConfirmLoading] = useState(false);
     const [values, setValues] = useState({});
+    const { confirm } = Modal;
+
+
+    function showConfirm() {
+        confirm({
+          title: 'Do you Want to delete these items?',
+          visible: {visible},
+          content: 'Some descriptions',
+          onOk() {
+            return new Promise(async(resolve, reject) => {
+                let st=await addCustomer(values);
+                console.log(st)
+                st=true;
+                setTimeout(st ? resolve(history.push('/customer')) : reject(console.log("ops")), 1000);
+              }).catch(() => console.log('Oops errors!'));
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+      }
 
     const showModal = () => {
         setVisible(true);
     };
 
+    
+
     const handleOk = async () => {
 
-        setConfirmLoading(true)
+       
         let st = await addCustomer(values)
         console.log(st)
         if (st == true) {
@@ -38,13 +62,15 @@ const CustomerAdd = () => {
     };
     const submitForm = useCallback(
         (values) => {
-
+            showConfirm()
             values.birthdate = values.birthdate._d.getDate() + "/" + (values.birthdate._d.getMonth() + 1) + "/" + values.birthdate._d.getFullYear()
             setValues(values)
             showModal()
         },
         [values, visible]
     )
+
+    
 
     return (
         <>
