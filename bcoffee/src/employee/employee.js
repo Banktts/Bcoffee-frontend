@@ -15,7 +15,7 @@ const Employee = () => {
     const [empId, setEmpId] = useState("")
     const [deleteModalVisible, setDeleteModalVisible] = useState(false)
     const [editModalVisible, setEditModalVisible] = useState(false)
-    const [position, setPosition] = useState("")
+    const [currentPosition, setCurrentPosition] = useState("")
     const [form] = Form.useForm();
     const PositionList = ["Barista","Cashier","Manager" ]
     useEffect(() => {
@@ -130,7 +130,9 @@ const Employee = () => {
     const handleEditEmployee = (record) => {
         setEmpId(record.emp_id)
         setEditModalVisible(true)
-        setPosition(record.position)
+        setCurrentPosition(data[record.emp_id-1].position)
+       
+        
     }
 
     const handleCancelEdit = () => {
@@ -153,11 +155,16 @@ const Employee = () => {
             console.log(error)
         }
     }
-
-    const changePosition = (e) => {
-        setPosition(e.target.value)
-    }
-
+    const handleCurrentPosition = useCallback(
+        () => {
+            
+            setCurrentPosition(data[empId-1].position)
+            console.log(data[empId-1].position)
+            return data[empId-1].position
+        },
+        [empId]
+    )
+   
     return (
         <div className="employee-container">
             <div className="text-title">
@@ -209,7 +216,7 @@ const Employee = () => {
                     className="form"
                 >
                     
-                    <CustomSelect  name="position" label="" values={PositionList}  />
+                    <CustomSelect defaultValue={()=>handleCurrentPosition()}  name="position" label="" values={PositionList}  />
 
 
                     
