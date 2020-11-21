@@ -30,6 +30,18 @@
             background-color: #bb9680;
         }
     }
+    .link-button-disable {
+        background-color: #929292;
+        border-radius: 4px;
+        border: none;
+        height: 36px;
+        width: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        cursor: not-allowed;
+    }
     .text-link {
         color: white;
         text-decoration: none;

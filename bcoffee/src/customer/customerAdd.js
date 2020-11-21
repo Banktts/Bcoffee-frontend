@@ -72,6 +72,7 @@ const CustomerAdd = () => {
                     form={form}
                     layout="vertical"
                     onFinish={submitForm}
+                    className="form"
                 >
                     <CustomInput name="customer_id" label="Customer Id" rule="required" />
                     <CustomInput name="name" label="Customer Name" rule="required" />

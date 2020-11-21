@@ -34,7 +34,7 @@ const App = () => {
           <Route exact key="inventory" path="/inventory" component={Inventory} />
           <Route exact key="menu" path="/menu" component={Menu} />
           <Route exact key="branch" path="/branch" component={Branch} />
-          <Route exact key="order-make" path="/order/make" component={MakeOrder} />
+          <Route exact key="order-make" path="/order/make/:branchId" component={MakeOrder} />
           <Route exact key="order-line" path={`/order/:orderId`} component={OrderLine} />
           <Route exact key="customer" path="/customer" component={Customer} />
           <Route exact path="/customer/add" component={CustomerAdd} />

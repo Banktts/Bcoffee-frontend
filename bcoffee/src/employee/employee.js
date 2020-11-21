@@ -1,77 +1,21 @@
-import { Button, Col, Row, Select, Table,Form,Modal } from 'antd'
+import { Button, Col, Row, Select, Table, Form, Modal, Input } from 'antd'
 import React, { useEffect, useState, useCallback } from 'react'
 import { CustomInput } from '../component/customInput'
 import './employee.scss'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
-import { getBranch, getEmployee } from '../service/user.service'
-
-// const data = [
-//     {
-//         key: "1",
-//         name: "Chaninart",
-//         gender: "Female",
-//         position: "Manager",
-//         birthdate: "xx/xx/xx",
-//         startDate: "xx/xx/xx",
-//         salary: "30000"
-//     },
-//     {
-//         key: "2",
-//         name: "Chaninart",
-//         gender: "Female",
-//         position: "Manager",
-//         birthdate: "xx/xx/xx",
-//         startDate: "xx/xx/xx",
-//         salary: "30000"
-//     },
-//     {
-//         key: "3",
-//         name: "Chaninart",
-//         gender: "Female",
-//         position: "Manager",
-//         birthdate: "xx/xx/xx",
-//         startDate: "xx/xx/xx",
-//         salary: "30000"
-//     },
-//     {
-//         key: "4",
-//         name: "Chaninart",
-//         gender: "Female",
-//         position: "Manager",
-//         birthdate: "xx/xx/xx",
-//         startDate: "xx/xx/xx",
-//         salary: "30000"
-//     },
-//     {
-//         key: "5",
-//         name: "Chaninart",
-//         gender: "Female",
-//         position: "Manager",
-//         birthdate: "xx/xx/xx",
-//         startDate: "xx/xx/xx",
-//         salary: "30000"
-//     },
-//     {
-//         key: "6",
-//         name: "Chaninart",
-//         gender: "Female",
-//         position: "Manager",
-//         birthdate: "xx/xx/xx",
-//         startDate: "xx/xx/xx",
-//         salary: "30000"
-//     }
-// ]
+import { deleteEmployee, getBranch, getEmployee, editEmployee } from '../service/user.service'
 
 const Employee = () => {
     const [data, setData] = useState([])
     const [branchList, setBranchList] = useState([])
     const [branchId, setBranchId] = useState("all")
-    const [visible, setVisible] = useState(false)
-    const [form] = Form.useForm();
-    const [position, setPosition] = useState();
-    const [currentEmployee,setCurrentEmployee]=useState();
+    const [empId, setEmpId] = useState("")
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+    const [editModalVisible, setEditModalVisible] = useState(false)
+    const [position, setPosition] = useState("")
+
     useEffect(() => {
         employee(branchId)
         branchData()
@@ -90,7 +34,6 @@ const Employee = () => {
     const branchData = async () => {
         try {
             const resBranch = await getBranch()
-            console.log(resBranch.data)
             setBranchList(resBranch.data)
         } catch (error) {
             console.log(error)
@@ -137,57 +80,73 @@ const Employee = () => {
             title: "",
             dataIndex: "edit",
             key: "edit",
-            render: (text) => (
+            render: (text, record) => (
                 <Row align="middle" justify="center" gutter={["16", "0"]}>
                     <Col>
-                        <Button>
+                        <Button onClick={() => handleEditEmployee(record)}>
                             <EditOutlined />
                         </Button>
 
                     </Col>
                     <Col>
-                        <Button>
+                        <Button onClick={() => handleDeleteEmployee(record.emp_id)}>
                             <DeleteOutlined />
                         </Button>
                     </Col>
                 </Row>
             )
-
-
         }
     ]
 
+    const handleDeleteEmployee = (empId) => {
+        setDeleteModalVisible(true)
+        setEmpId(empId)
+    }
+
+    const handleCanceldelete = () => {
+        setDeleteModalVisible(false)
+    }
+
+    const handleNoDelete = () => {
+        setDeleteModalVisible(false)
+    }
+
+    const handleYesDelete = async () => {
+        try {
+            const res = await deleteEmployee(empId)
+            setDeleteModalVisible(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const handleChangeBranch = (e) => {
         setBranchId(e) //branch id
-        console.log(e)
         employee(e)
     }
 
-    const showModal = () => {
-        setVisible(true)
+    const handleEditEmployee = (record) => {
+        setEmpId(record.emp_id)
+        setEditModalVisible(true)
+        setPosition(record.position)
+    }
 
-    };
+    const handleCancelEdit = () => {
+        setEditModalVisible(false)
+    }
 
-    const handleOk = e => {
-        console.log(e);
-        setVisible(false)
-    };
+    const handleSubmitEdit = async () => {
+        try {
+            const res = await editEmployee({ empId, position })
+            setEditModalVisible(false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-    const handleCancel = e => {
-        console.log(e);
-        setVisible(false)
-    };
-    const submitForm = useCallback(
-        (position) => {
-            console.log(position)
-            console.log(currentEmployee)
-            /// patch api
-            setPosition(position.position)
-            handleOk()
-
-        },
-        [position,currentEmployee]
-    )
+    const changePosition = (e) => {
+        setPosition(e.target.value)
+    }
 
     return (
         <div className="employee-container">
@@ -206,38 +165,40 @@ const Employee = () => {
                         ))}
                     </Select>
                 </Col>
-                {/* <div className="link-button">
-                    <Link to="/order/make" className="text-link"><PlusOutlined /> Add Employee</Link>
-                </div> */}
             </Row>
-            <Button type="primary" onClick={showModal}>
-                Open Modal
-        </Button>
-
-            <Modal
-                
-                title="Edit position of employee."
-                visible={visible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                footer={[]}
-            >
-                <Form
-
-                    form={form}
-                    layout="horizontal"
-                    onFinish={submitForm}
-                >
-                    <CustomInput  name="position" label="Position" rule="required" />
-                    <Row justify="center" gutter={{ xs: 9}}> 
-                        <Col span={7}><Button type="primary" htmlType="submit"  onClick={()=>setCurrentEmployee("EmployeeName")} >Submit</Button></Col>
-                        <Col span={6}><Button key="back" onClick={handleCancel}>
-                       Cancel
-                    </Button></Col>
-                    </Row>
-                    
-                    
-                </Form>
+            <Modal visible={deleteModalVisible}
+                onCancel={handleCanceldelete}
+                centered
+                footer={false}>
+                <div className="text-modal">
+                    Delete employee ?
+                </div>
+                <div className="m-t-30 text-center">
+                    <Button onClick={handleYesDelete} className="button green">
+                        Yes
+                </Button>
+                    <Button onClick={handleNoDelete} className="button red">
+                        No
+                </Button>
+                </div>
+            </Modal>
+            <Modal visible={editModalVisible}
+                onCancel={handleCancelEdit}
+                centered
+                footer={false}
+                className="modal-edit">
+                <div className="text-modal">
+                    Edit position of employee ?
+                </div>
+                <Input name="position" value={position} label="Position" rule="required" onChange={changePosition} className="m-t-10" />
+                <div className="m-t-30 text-center">
+                    <Button onClick={handleSubmitEdit} className="button green">
+                        Submit
+                </Button>
+                    <Button onClick={handleCancelEdit} className="button red">
+                        Cancel
+                </Button>
+                </div>
             </Modal>
 
             <Table dataSource={data} columns={columns} pagination={false} className="table" />
