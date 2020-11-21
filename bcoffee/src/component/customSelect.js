@@ -6,7 +6,7 @@ export const CustomSelect = (props) => {
    
  
     return (
-        <Form.Item name={props.name} label={props.label+" :"} rules={[ruleError(props.rule)]} >
+        <Form.Item name={props.name} label={props.label} rules={[ruleError(props.rule)]} >
         <Select>
           {props.values.map((value) => (
             <Select.Option value={value} key={value}>

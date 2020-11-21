@@ -1,5 +1,5 @@
 import { Button, Col, DatePicker, Row, Select, Table } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import './branch.scss'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
@@ -52,21 +52,21 @@ const data = [
     }
 ]
 
-//topspender: show top three name of customer 
+
 
 const Branch = () => {
     const dateFormat = "DD-MM-YYYY";
     const [data, setData] = useState([])
+    const [branchId, setBranchId] = useState("all")
+    const [totalIncome,setTotalIncome] =useState(0)
 
-    useEffect(() => {
-        branch()
-    }, [])
 
-    const branch = async () => {
+    const branch = async (branchId) => {
         try {
-            const res = await getBranch()
+            const res = await getBranch(branchId)
             setData(res.data)
             console.log(res.data)
+            setTotalIncome( res.data.map(i => i.totalprice).reduce((a, b) => a + b))
         } catch (error) {
             console.log(error);
         }
@@ -84,20 +84,19 @@ const Branch = () => {
             key: "street",
         },
         {
-            title: "Top Spender",
-            dataIndex: "topSpender",
-            key: "topSpender",
-        },
-        {
-            title: "Income",
-            dataIndex: "income",
+            title: "Total Income",
+            dataIndex: "totalprice",
             key: "income",
         },
     ]
 
-    const handleChangeDate = (e) => {
+    useEffect(async () => {
+        await branch(branchId)
+        
 
-    }
+    }, [])
+
+    
 
     return (
         <div className="branch-container">
@@ -107,9 +106,7 @@ const Branch = () => {
             {/* <Row justify="space-between" align="middle" className="m-y-16">
                 <Row justify="start" align="middle" gutter={["16", "0"]}> */}
 
-            <div className="m-y-16">
-                <DatePicker onChange={handleChangeDate} defaultValue={moment()} format={dateFormat} />
-            </div>
+
             {/* </Row>
 
                 <div className="link-button">
@@ -120,8 +117,8 @@ const Branch = () => {
                 <Table.Summary.Row>
                     <Table.Summary.Cell >All</Table.Summary.Cell>
                     <Table.Summary.Cell ></Table.Summary.Cell>
-                    <Table.Summary.Cell >xxxxxx</Table.Summary.Cell>
-                    <Table.Summary.Cell >xxxxxx</Table.Summary.Cell>
+
+            <Table.Summary.Cell >{totalIncome}</Table.Summary.Cell>
                 </Table.Summary.Row>
 
             )} />

@@ -1,86 +1,23 @@
 import './inventory.scss'
-import { Button, Col, Row, Select, Table, Modal, Form } from 'antd'
+import { Button, Col, Row, Select, Table, Modal, Form, Input } from 'antd'
 import React, { useEffect, useState, useCallback } from 'react'
 import { CustomInput } from '../component/customInput'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
-import { getBranch, getInventory } from '../service/user.service'
-
-const data = [
-    {
-        key: "1",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "2",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "3",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "4",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "5",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "6",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "7",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-    {
-        key: "8",
-        itemNo: "12",
-        type: "salt",
-        branchNo: "33",
-        amount: "100",
-        unit: "g"
-    },
-]
+import { editInventory, getBranch, getInventory } from '../service/user.service'
 
 const Inventory = () => {
     const [branchList, setBranchList] = useState([])
     const [branchId, setBranchId] = useState("all")
     const [data, setData] = useState([])
-    const [visible, setVisible] = useState(false)
+    const [editModalVisible, setEditModalVisible] = useState(false)
     const [amount, setAmount] = useState();
-    const [currentBranch,setCurrentBranch]=useState();
+    const [currentBranch, setCurrentBranch] = useState();
+    const [itemId, setItemId] = useState("")
+    const [amountItem, setAmountItem] = useState("")
+    const [branchIdEdit, setBranchIdEdit] = useState("")
+
     useEffect(() => {
         inventory(branchId)
         branchData()
@@ -136,20 +73,10 @@ const Inventory = () => {
             title: "",
             dataIndex: "edit",
             key: "edit",
-            render: (text) => (
-                // <Row align="middle" justify="center" gutter={["16", "0"]}>
-                // <Col>
-                <Button>
+            render: (text, record) => (
+                <Button onClick={() => showModal(record)}>
                     <EditOutlined />
                 </Button>
-
-                // </Col>
-                //     <Col>
-                //         <Button>
-                //             <DeleteOutlined />
-                //         </Button>
-                //     </Col>
-                // </Row>
             )
         }
     ]
@@ -159,35 +86,41 @@ const Inventory = () => {
         console.log(e)
         inventory(e)
     }
-    const showModal = () => {
-        setVisible(true)
 
+    const showModal = (record) => {
+        setEditModalVisible(true)
+        setItemId(record.item_id)
+        setAmountItem(record.amount)
+        setBranchIdEdit(record.branch_id)
+        console.log(amountItem)
     };
 
-    const handleOk = e => {
-        console.log(e);
-        setVisible(false)
-    };
+    const handleCancelEdit = () => {
+        setEditModalVisible(false)
+    }
 
-    const handleCancel = e => {
-        console.log(e);
-        setVisible(false)
-    };
-    const submitForm = useCallback(
-        (amount) => {
-            console.log(amount)
-            console.log(currentBranch)
-            /// patch api
-            setAmount(amount.amount)
-            handleOk()
+    const handleSubmitEdit = async () => {
+        try {
+            console.log("itemid", itemId)
+            console.log("amountitem", amountItem)
+            console.log("branchid", branchId)
+            const res = await editInventory({ itemId, amountItem, branchIdEdit })
+            setEditModalVisible(false)
+            inventory(branchId)
+            branchData()
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-        },
-        [amount,currentBranch]
-    )
+    const changeAmount = (e) => {
+        console.log(e.target)
+        setAmountItem(e.target.value)
+    }
 
-    const [form] = Form.useForm();
     return (
         <div className="inventory-container">
+
             <div className="text-title">
                 Inventory
             </div>
@@ -207,34 +140,22 @@ const Inventory = () => {
                     <Link to="/order/make" className="text-link"><PlusOutlined /> Add Inventory</Link>
                 </div> */}
             </Row>
-            <Button type="primary" onClick={showModal}>
-                Open Modal
-        </Button>
-
-            <Modal
-                
-                title="Edit amount of item."
-                visible={visible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                footer={[]}
-            >
-                <Form
-
-                    form={form}
-                    layout="horizontal"
-                    onFinish={submitForm}
-                >
-                    <CustomInput  name="amount" label="Amount" rule="required" />
-                    <Row justify="center" gutter={{ xs: 9}}> 
-                        <Col span={7}><Button type="primary" htmlType="submit"  onClick={()=>setCurrentBranch("branchName")} > Submit</Button></Col>
-                        <Col span={6}><Button key="back" onClick={handleCancel}>
-                       Cancel
-                    </Button></Col>
-                    </Row>
-                    
-                    
-                </Form>
+            <Modal visible={editModalVisible}
+                onCancel={handleCancelEdit}
+                centered
+                footer={false}>
+                <div className="text-modal">
+                    Edit amount of item ?
+                </div>
+                <Input name="amount" value={amountItem} label="Amount" rule="required" onChange={changeAmount} />
+                <div className="m-t-30 text-center">
+                    <Button onClick={handleSubmitEdit} className="button green">
+                        Submit
+                </Button>
+                    <Button onClick={handleCancelEdit} className="button red">
+                        Cancel
+                </Button>
+                </div>
             </Modal>
 
             <Table dataSource={data} columns={columns} pagination={false} className="table" />

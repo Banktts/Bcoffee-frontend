@@ -21,12 +21,9 @@ const CustomerAdd = () => {
             content: 'Are you sure to add new employee.',
             onOk() {
                 return new Promise(async(resolve, reject) => {
-                    let st = await addCustomer(values)
-                    if (st == true) {
-                        resolve(history.push('/customer'))
-                    } else if (st == false) {
-                        resolve(showInfo())
-                    }
+                    console.log(values)
+                    await addCustomer(values)
+                    resolve(history.push('/customer'))
                 })
             },
             onCancel() {
@@ -47,9 +44,10 @@ const CustomerAdd = () => {
 
     const submitForm = useCallback(
         (values) => {
-            showConfirm()
             values.birthdate = values.birthdate._d.getDate() + "/" + (values.birthdate._d.getMonth() + 1) + "/" + values.birthdate._d.getFullYear()
             setValues(values)
+            showConfirm()
+            
 
 
         },
@@ -72,11 +70,11 @@ const CustomerAdd = () => {
                     form={form}
                     layout="vertical"
                     onFinish={submitForm}
+                    className="form"
                 >
-                    <CustomInput name="customer_id" label="Customer Id" rule="required" />
                     <CustomInput name="name" label="Customer Name" rule="required" />
                     <CustomInput name="SSN" label="ID card number" rule="required" />
-                    <CustomSelect name="sex" label="Gender" values={gender} rule="required" />
+                    <CustomSelect name="sex" label="Gender :" values={gender} rule="required" />
                     <CustomDatepicker name="birthdate" label="Birth date" rule="required" />
                     <CustomInput name="memberpoint" label="Member Point" rule="required" />
                     <CustomInput name="phone_no" label="Phone Number" rule="phoneRequired" rule="required" />

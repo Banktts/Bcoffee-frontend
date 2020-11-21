@@ -1,10 +1,9 @@
 import axios from 'axios'
 
-const URL = "http://localhost:4000"
 
 export const getMenu = async (branchId) => {
     try {
-        return await axios.get(URL + `/menu/${branchId}`)
+        return await axios.get( `/menu/${branchId}`)
     } catch (err) {
         throw err
     }
@@ -12,7 +11,7 @@ export const getMenu = async (branchId) => {
 
 export const getEmployee = async (branchId) => {
     try {
-        return await axios.get(URL + `/employee/${branchId}`)
+        return await axios.get( `/employee/${branchId}`)
     } catch (err) {
         throw err
     }
@@ -20,7 +19,7 @@ export const getEmployee = async (branchId) => {
 
 export const getOrder = async (branchId, date) => {
     try {
-        return await axios.get(URL + `/order/${branchId}/${date}`)
+        return await axios.get( `/order/${branchId}/${date}`)
     } catch (err) {
         throw err
     }
@@ -28,55 +27,58 @@ export const getOrder = async (branchId, date) => {
 
 export const getInventory = async (branchId) => {
     try {
-        return await axios.get(URL + `/inventory/${branchId}`)
+        return await axios.get( `/inventory/${branchId}`)
     } catch (err) {
         throw err
     }
 }
 
-export const getBranch = async () => {
+export const getBranch = async (branchId) => {
     try {
-        return await axios.get(URL + "/branch")
+        return await axios.get( `/branch/${branchId}`)
     } catch (err) {
         throw err
     }
 }
 
-export const getCustomer = async (name) => {
+export const getCustomer = async (customerId) => {
     try {
-        // return await axios.get("/customer", name)
+        return await axios.get( `/customer/${customerId}`)
     } catch (err) {
         throw err
     }
 }
 //bank
-export const editEmployee = async () => {
+export const editEmployee = async (data) => {
     try {
-        // return await axios.patch()
+        console.log(data)
+        return await axios.put( `/update/position/${data.empId}`, data.position)
     } catch (err) {
         throw err
     }
 }
 //mint
-export const deleteEmployee = async (branchId) => {
+export const deleteEmployee = async (empId) => {
     try {
-        // return await axios.delete()
+        return await axios.delete( `/delete/employee/${empId}`)
     } catch (err) {
         throw err
     }
 }
 //bank
-export const editInventory = async (branchId) => {
+export const editInventory = async (data) => {
     try {
-        // return await axios.patch()
+        console.log("data", data)
+        
+        return await axios.put( `/inventory/update/${data.branchIdEdit}/${data.itemId}`, data)
     } catch (err) {
         throw err
     }
 }
 //mint
-export const deleteMenu = async (branchId) => {
+export const deleteMenu = async (data) => {
     try {
-        // return await axios.delete()
+        return await axios.delete( `/delete/menu/${data.menuId}/${data.branchId}`, data)
     } catch (err) {
         throw err
     }
@@ -84,11 +86,10 @@ export const deleteMenu = async (branchId) => {
 //bank
 export const addCustomer = async (values) => {
     try {
-        let res = await axios.post(URL+'/addcustomer',values)
-        console.log(res.false)
-        return res.data
-    } catch (err) {
+        return await axios.post( '/customer/add', values)
         
-        return false
+    } catch (err) {
+
+        throw err
     }
 }
