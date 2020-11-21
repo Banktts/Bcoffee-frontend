@@ -57,7 +57,9 @@ const data = [
 ]
 
 const Order = () => {
-    const dateFormat = "DD-MM-YYYY";
+    const dateFormat = "YYYY-MM-DD";
+    const dateFormatt = "DD-MM-YYYY"
+    const timeFormat = "HH:mm";
     const history = useHistory()
     const [data, setData] = useState([])
     const [branchList, setBranchList] = useState([])
@@ -92,79 +94,70 @@ const Order = () => {
     const columns = [
         {
             title: "Order Id",
-            dataIndex: "orderId",
-            key: "orderId",
+            dataIndex: "order_id",
+            key: "order_id",
         },
         {
             title: "CustomerId",
-            dataIndex: "customerId",
-            key: "customerId",
+            dataIndex: "customer_id",
+            key: "customer_id",
         },
         {
             title: "Branch Id",
-            dataIndex: "branchId",
-            key: "branchId",
+            dataIndex: "branch_id",
+            key: "branch_id",
         },
         {
             title: "Employee Id",
-            dataIndex: "employeeId",
-            key: "employeeId",
+            dataIndex: "emp_id",
+            key: "emp_id",
         },
         {
             title: "Date",
-            dataIndex: "date",
-            key: "date",
+            dataIndex: "created_at",
+            key: "create_at",
+            render: (text, record) => (
+                <>{moment(record.created_at).format(dateFormatt)}</>
+            ),
         },
         {
             title: "Time",
             dataIndex: "time",
             key: "time",
+            render: (text, record) => (
+                <>{moment(record.checkIn).format(timeFormat)}</>
+            ),
         },
         {
             title: "Total Price",
-            dataIndex: "totalPrice",
-            key: "totalPrice",
+            dataIndex: "totalpriceb",
+            key: "totalpriceb",
         },
-        // {
-        //     title: "",
-        //     dataIndex: "edit",
-        //     key: "edit",
-        //     render: (text) => (
-        //         <Row align="middle" justify="center" gutter={["16", "0"]}>
-        //             <Col>
-        //                 <Button>
-        //                     <EditOutlined />
-        //                 </Button>
-
-        //             </Col>
-        //             <Col>
-        //                 <Button>
-        //                     <DeleteOutlined />
-        //                 </Button>
-        //             </Col>
-        //         </Row>
-
-        //     )
-        // }
     ]
 
     const handleChangeBranch = (e) => {
         setBranchId(e) //branch id
-        order(e)
+        console.log("branchId", e)
+        order(e, date)
     }
 
     const handleChangeDate = (e) => {
-        console.log(e)
+        setDate(moment(e).format(dateFormat))
+        order(branchId, moment(e).format(dateFormat))
     }
 
     const handleClickRow = (record) => {
         return {
             onClick: () => {
-                history.push(`order/${record.orderId}`) //change 5 to orderId that record
+                history.push(`order/${record.orderId}`)
                 console.log(record)
             }
         }
     }
+
+    const disabledDate = (current) => {
+        return current && current > moment().endOf("day");
+    };
 
     return (
         <div className="order-container">
@@ -184,13 +177,19 @@ const Order = () => {
                         </Select>
                     </Col>
                     <Col>
-                        <DatePicker onChange={handleChangeDate} defaultValue={moment()} format={dateFormat} />
+                        <DatePicker onChange={handleChangeDate} defaultValue={moment()} format={dateFormatt} disabledDate={disabledDate} />
                     </Col>
                 </Row>
+                {branchId === "all" ?
+                    <div className="link-button-disable">
+                        <div className="text-link">
+                            <PlusOutlined /> Place Order
+                        </div>
+                    </div> :
+                    <div className="link-button">
+                        <Link to={`/order/make/${branchId}`} className="text-link"><PlusOutlined /> Place Order</Link>
+                    </div>}
 
-                <div className="link-button">
-                    <Link to="/order/make" className="text-link"><PlusOutlined /> Place Order</Link>
-                </div>
             </Row>
             <Table dataSource={data} columns={columns} pagination={false} className="table" onRow={handleClickRow} />
         </div>

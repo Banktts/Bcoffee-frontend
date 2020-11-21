@@ -42,41 +42,42 @@ export const getBranch = async () => {
     }
 }
 
-export const getCustomer = async (name) => {
+export const getCustomer = async (customerId) => {
     try {
-        // return await axios.get("/customer", name)
+        return await axios.get(URL + `/customer/${customerId}`)
     } catch (err) {
         throw err
     }
 }
 //bank
-export const editEmployee = async () => {
+export const editEmployee = async (data) => {
     try {
-        // return await axios.patch()
+        return await axios.put(URL + `/update/position/${data.empId}`, data)
     } catch (err) {
         throw err
     }
 }
 //mint
-export const deleteEmployee = async (branchId) => {
+export const deleteEmployee = async (empId) => {
     try {
-        // return await axios.delete()
+        return await axios.delete(URL + `/delete/employee/${empId}`)
     } catch (err) {
         throw err
     }
 }
 //bank
-export const editInventory = async (branchId) => {
+export const editInventory = async (data) => {
     try {
-        // return await axios.patch()
+        console.log("data", data)
+        return await axios.put(URL + `/inventory/update/${data.branchIdEdit}/${data.itemId}`, data)
     } catch (err) {
         throw err
     }
 }
 //mint
-export const deleteMenu = async (branchId) => {
+export const deleteMenu = async (data) => {
     try {
-        // return await axios.delete()
+        return await axios.delete(URL + `/delete/menu/${data.menuId}/${data.branchId}`, data)
     } catch (err) {
         throw err
     }
@@ -84,11 +85,11 @@ export const deleteMenu = async (branchId) => {
 //bank
 export const addCustomer = async (values) => {
     try {
-        let res = await axios.post(URL+'/addcustomer',values)
+        let res = await axios.post(URL + '/addcustomer', values)
         console.log(res.false)
         return res.data
     } catch (err) {
-        
+
         return false
     }
 }

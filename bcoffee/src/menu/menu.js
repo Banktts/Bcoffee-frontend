@@ -4,69 +4,16 @@ import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
-import { getMenu, getBranch } from '../service/user.service'
-
-// const data = [
-//     {
-//         key: "1",
-//         imgUrl: "12",
-//         menuNo: "salt",
-//         menuName: "33",
-//         type: "100",
-//         price: "g",
-//         ingredient: "xxx",
-//     },
-//     {
-//         key: "2",
-//         imgUrl: "12",
-//         menuNo: "salt",
-//         menuName: "33",
-//         type: "100",
-//         price: "g",
-//         ingredient: "xxx",
-//     },
-//     {
-//         key: "3",
-//         imgUrl: "12",
-//         menuNo: "salt",
-//         menuName: "33",
-//         type: "100",
-//         price: "g",
-//         ingredient: "xxx",
-//     },
-//     {
-//         key: "4",
-//         imgUrl: "12",
-//         menuNo: "salt",
-//         menuName: "33",
-//         type: "100",
-//         price: "g",
-//         ingredient: "xxx",
-//     },
-//     {
-//         key: "5",
-//         imgUrl: "12",
-//         menuNo: "salt",
-//         menuName: "33",
-//         type: "100",
-//         price: "g",
-//         ingredient: "xxx",
-//     },
-//     {
-//         key: "6",
-//         imgUrl: "12",
-//         menuNo: "salt",
-//         menuName: "33",
-//         type: "100",
-//         price: "g",
-//         ingredient: "xxx",
-//     },
-// ]
+import { getMenu, getBranch, deleteMenu } from '../service/user.service'
+import Modal from 'antd/lib/modal/Modal'
 
 const Menu = () => {
     const [data, setData] = useState([])
     const [branchId, setBranchId] = useState("all")
     const [branchList, setBranchList] = useState([])
+    const [deleteModalVisible, setDeleteModalVisible] = useState(false)
+    const [menuId, setMenuId] = useState("")
+
 
     useEffect(() => {
         menuData(branchId)
@@ -135,20 +82,10 @@ const Menu = () => {
             title: "",
             dataIndex: "edit",
             key: "edit",
-            render: (text) => (
-                <Row align="middle" justify="center" gutter={["16", "0"]}>
-                    <Col>
-                        <Button>
-                            <EditOutlined />
-                        </Button>
-
-                    </Col>
-                    <Col>
-                        <Button>
-                            <DeleteOutlined />
-                        </Button>
-                    </Col>
-                </Row>
+            render: (text, record) => (
+                <Button onClick={() => handledeleteMenu(record.menu_id)}>
+                    <DeleteOutlined />
+                </Button>
             )
         }
     ]
@@ -157,6 +94,28 @@ const Menu = () => {
         setBranchId(e) //branch id
         console.log(e)
         menuData(e)
+    }
+
+    const handledeleteMenu = (menu_id) => {
+        setDeleteModalVisible(true)
+        setMenuId(menu_id)
+    }
+
+    const handleCanceldelete = () => {
+        setDeleteModalVisible(false)
+    }
+
+    const handleNoDelete = () => {
+        setDeleteModalVisible(false)
+    }
+
+    const handleYesDelete = async () => {
+        try {
+            const res = await deleteMenu({ branchId, menuId })
+            setDeleteModalVisible(false)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -182,6 +141,22 @@ const Menu = () => {
             </Row>
 
             <Table dataSource={data} columns={columns} pagination={false} className="table" />
+            <Modal visible={deleteModalVisible}
+                onCancel={handleCanceldelete}
+                centered
+                footer={false}>
+                <div className="text-modal">
+                    Delete menu ?
+                </div>
+                <div className="m-t-30 text-center">
+                    <Button onClick={handleYesDelete} className="button green">
+                        Yes
+                </Button>
+                    <Button onClick={handleNoDelete} className="button red">
+                        No
+                </Button>
+                </div>
+            </Modal>
         </div>
     )
 }

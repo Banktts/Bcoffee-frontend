@@ -5,7 +5,7 @@ import { Option } from 'antd/lib/mentions'
 import { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import './customer.scss'
-// import { getCustomer } from '../service/user.service'
+import { getCustomer } from '../service/user.service'
 
 const data = [
     {
@@ -57,87 +57,69 @@ const data = [
 ]
 
 const Customer = () => {
-    const [name, setName] = useState("")
+    const [customerId, setCustomerId] = useState("none")
     const [data, setData] = useState([])
 
-    // useEffect(() => {
-    //     customer(name)
-    // })
+    useEffect(() => {
+        customer(customerId)
+    }, [])
 
-    // const customer = async (name) => {
-    //     try {
-    //         const res = await getCustomer(name)
-    //         setData(res.data)
-    //         console.log(res.data)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const customer = async (customerId) => {
+        try {
+            const res = await getCustomer(customerId)
+            setData(res.data)
+            console.log(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const columns = [
         {
             title: "Customer Id",
-            dataIndex: "customerId",
-            key: "customerId",
+            dataIndex: "customer_id",
+            key: "customer_id",
         },
         {
             title: "Customer Name",
-            dataIndex: "customerName",
-            key: "customerName",
+            dataIndex: "name",
+            key: "name",
         },
         {
             title: "SSN",
-            dataIndex: "ssn",
-            key: "ssn",
+            dataIndex: "SSN",
+            key: "SSN",
         },
         {
             title: "Gender",
-            dataIndex: "gender",
-            key: "gender",
+            dataIndex: "sex",
+            key: "sex",
         },
         {
             title: "Birth Date",
-            dataIndex: "birthDate",
-            key: "birthDate",
+            dataIndex: "birthdate",
+            key: "birthdate",
         },
         {
             title: "Phone Number",
-            dataIndex: "phoneNumber",
-            key: "phoneNumber",
+            dataIndex: "phone_no",
+            key: "phone_no",
         },
         {
             title: "Member Point",
-            dataIndex: "totalPrice",
-            key: "totalPrice",
-        },
-        // {
-        //     title: "",
-        //     dataIndex: "edit",
-        //     key: "edit",
-        //     render: (text) => (
-        //         <Row align="middle" justify="center" gutter={["16", "0"]}>
-        //             <Col>
-        //                 <Button>
-        //                     <EditOutlined />
-        //                 </Button>
-
-        //             </Col>
-        //             <Col>
-        //                 <Button>
-        //                     <DeleteOutlined />
-        //                 </Button>
-        //             </Col>
-        //         </Row>
-
-        //     )
-
-
-        // }
+            dataIndex: "memberpoint",
+            key: "memberpoint",
+        }
     ]
 
     const handleSearch = (e) => {
-        setName(e)
-        // customer(name)
+        setCustomerId(e)
+        if (e != "") {
+            customer(e)
+        }
+        else {
+            customer("none")
+        }
     }
 
     return (

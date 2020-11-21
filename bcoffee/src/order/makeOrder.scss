@@ -121,3 +121,24 @@
         width: 100%;
     }
 }
+.ant-modal-body {
+    height: 170px;
+    .text-modal {
+        font-size: 20px;
+    }
+    .button {
+        width: 130px;
+        height: 35px;
+        font-size: 18px;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        &.green {
+            background-color: #008C5B;
+            margin-right: 10px;
+        }
+        &.red {
+            background-color: #D66969;
+        }
+    }
+}
