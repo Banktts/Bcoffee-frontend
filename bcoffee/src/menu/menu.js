@@ -113,6 +113,7 @@ const Menu = () => {
         try {
             const res = await deleteMenu({ branchId, menuId })
             setDeleteModalVisible(false)
+            menuData(branchId)
         } catch (error) {
             console.log(error)
         }
@@ -126,7 +127,11 @@ const Menu = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
 
                 <Col>
-                    <Select defaultValue="all" onChange={handleChangeBranch} >
+                    <Select
+                        showSearch
+                        optionFilterProp="children"
+                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        defaultValue="all" onChange={handleChangeBranch} >
                         <Option value="all" key="all">All</Option>
                         {branchList.map((a) => (
                             <Option value={a.branch_id} key={a.branch_id}>

@@ -57,16 +57,17 @@ const data = [
 ]
 
 const Customer = () => {
-    const [customerId, setCustomerId] = useState("none")
+    const [customerName, setCustomerName] = useState("none")
     const [data, setData] = useState([])
 
     useEffect(() => {
-        customer(customerId)
+        customer(customerName)
     }, [])
 
-    const customer = async (customerId) => {
+    const customer = async (customerName) => {
         try {
-            const res = await getCustomer(customerId)
+            console.log("name", customerName)
+            const res = await getCustomer(customerName)
             setData(res.data)
             console.log(res.data)
         } catch (error) {
@@ -113,8 +114,10 @@ const Customer = () => {
     ]
 
     const handleSearch = (e) => {
-        setCustomerId(e)
+        console.log("e", e)
+        setCustomerName(e)
         if (e != "") {
+
             customer(e)
         }
         else {
@@ -130,7 +133,7 @@ const Customer = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
                 <Col>
                     <Search
-                        placeholder="Customer Id"
+                        placeholder="Customer Name"
                         onSearch={(e) => {
                             handleSearch(e);
                         }}

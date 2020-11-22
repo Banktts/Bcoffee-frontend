@@ -20,7 +20,7 @@ export const getEmployee = async (branchId) => {
 
 export const getOrder = async (branchId, date) => {
     try {
-        return await axios.get(URL + `/order/${branchId}/${date}`)
+        return await axios.get(URL + `/all/order/${branchId}/${date}`)
     } catch (err) {
         throw err
     }
@@ -42,9 +42,9 @@ export const getBranch = async () => {
     }
 }
 
-export const getCustomer = async (customerId) => {
+export const getCustomer = async (customerName) => {
     try {
-        return await axios.get(URL + `/customer/${customerId}`)
+        return await axios.get(URL + `/customer/${customerName}`)
     } catch (err) {
         throw err
     }
@@ -91,5 +91,29 @@ export const addCustomer = async (values) => {
     } catch (err) {
 
         return false
+    }
+}
+
+export const placeOrder = async (data) => {
+    try {
+        return await axios.post(URL + "/post/order", data)
+    } catch (err) {
+        throw err
+    }
+}
+
+export const getOrderLine = async (orderId) => {
+    try {
+        return await axios.get(URL + `/orderline/${orderId}`)
+    } catch (err) {
+        throw err
+    }
+}
+
+export const getOrderEach = async (orderId) => {
+    try {
+        return await axios.get(URL + `/order/${orderId}`)
+    } catch (err) {
+        throw err
     }
 }

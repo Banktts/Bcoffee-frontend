@@ -1,6 +1,7 @@
 .make-order-container {
     width: 100%;
     padding: 40px;
+    height: 100%;
     .grid {
         display: grid;
         gap: 60px;
@@ -27,7 +28,7 @@
         padding-bottom: 80px;
     }
     .h-100 {
-        height: 100%;
+        height: 100vh;
         padding-bottom: 40px;
         padding-top: 20px;
     }
@@ -81,6 +82,15 @@
             background-color: #4aad8b;
         }
     }
+    .btn-check-disable {
+        background-color: #929292;
+        color: white;
+        height: 45px;
+        border-radius: 6px;
+        font-size: 20px;
+        border: none;
+        cursor: not-allowed;
+    }
     .ant-btn:not([disabled]):active {
         &.btn-check {
             color: white;
@@ -119,6 +129,13 @@
         bottom: 0;
         padding: 20px 40px 20px 0;
         width: 100%;
+    }
+    .ant-select-selection-search, 
+    .ant-select-single.ant-select-show-arrow .ant-select-selection-search{
+        width: 200px;
+    }
+    .ant-select-show-search {
+        width: 200px;
     }
 }
 .ant-modal-body {
