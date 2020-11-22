@@ -1,4 +1,4 @@
-import { Button, Col, DatePicker, Row, Select, Table } from 'antd'
+import { Col, DatePicker, Row, Select, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import './order.scss'
 import { Link, useHistory } from "react-router-dom"
@@ -6,55 +6,6 @@ import { PlusOutlined, DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Option } from 'antd/lib/mentions'
 import moment from "moment";
 import { getBranch, getOrder } from '../service/user.service'
-
-const data = [
-    {
-        key: "1",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "2",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "3",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "4",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "5",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD/-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-
-]
 
 const Order = () => {
     const dateFormat = "YYYY-MM-DD";
@@ -125,7 +76,7 @@ const Order = () => {
             dataIndex: "time",
             key: "time",
             render: (text, record) => (
-                <>{moment(record.checkIn).format(timeFormat)}</>
+                <>{moment(record.created_at).format(timeFormat)}</>
             ),
         },
         {
@@ -137,7 +88,6 @@ const Order = () => {
 
     const handleChangeBranch = (e) => {
         setBranchId(e) //branch id
-        console.log("branchId", e)
         order(e, date)
     }
 
@@ -149,8 +99,7 @@ const Order = () => {
     const handleClickRow = (record) => {
         return {
             onClick: () => {
-                history.push(`order/${record.orderId}`)
-                console.log(record)
+                history.push(`order/${record.order_id}`)
             }
         }
     }
@@ -167,7 +116,11 @@ const Order = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
                 <Row justify="start" align="middle" gutter={["16", "0"]}>
                     <Col>
-                        <Select defaultValue="all" onChange={handleChangeBranch} >
+                        <Select
+                            showSearch
+                            optionFilterProp="children"
+                            filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                            defaultValue="all" onChange={handleChangeBranch} >
                             <Option value="all" key="all">All</Option>
                             {branchList.map((a) => (
                                 <Option value={a.branch_id} key={a.branch_id}>

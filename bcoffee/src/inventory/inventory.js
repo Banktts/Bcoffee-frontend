@@ -83,7 +83,6 @@ const Inventory = () => {
 
     const handleChangeBranch = (e) => {
         setBranchId(e)
-        console.log(e)
         inventory(e)
     }
 
@@ -92,7 +91,6 @@ const Inventory = () => {
         setItemId(record.item_id)
         setAmountItem(record.amount)
         setBranchIdEdit(record.branch_id)
-        console.log(amountItem)
     };
 
     const handleCancelEdit = () => {
@@ -101,20 +99,16 @@ const Inventory = () => {
 
     const handleSubmitEdit = async () => {
         try {
-            console.log("itemid", itemId)
-            console.log("amountitem", amountItem)
-            console.log("branchid", branchId)
             const res = await editInventory({ itemId, amountItem, branchIdEdit })
             setEditModalVisible(false)
             inventory(branchId)
-            branchData()
+            branchData() //for what
         } catch (error) {
             console.log(error)
         }
     }
 
     const changeAmount = (e) => {
-        console.log(e.target)
         setAmountItem(e.target.value)
     }
 
@@ -127,7 +121,11 @@ const Inventory = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
 
                 <Col>
-                    <Select defaultValue="all" onChange={handleChangeBranch} >
+                    <Select
+                        showSearch
+                        optionFilterProp="children"
+                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        defaultValue="all" onChange={handleChangeBranch} >
                         <Option value="all" key="all">All</Option>
                         {branchList.map((a) => (
                             <Option value={a.branch_id} key={a.branch_id}>

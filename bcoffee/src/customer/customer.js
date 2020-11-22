@@ -7,66 +7,17 @@ import { Link } from "react-router-dom"
 import './customer.scss'
 import { getCustomer } from '../service/user.service'
 
-const data = [
-    {
-        key: "1",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "2",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "3",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "4",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "5",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-
-]
-
 const Customer = () => {
-    const [customerId, setCustomerId] = useState("none")
+    const [customerName, setCustomerName] = useState("none")
     const [data, setData] = useState([])
 
     useEffect(() => {
-        customer(customerId)
+        customer(customerName)
     }, [])
 
-    const customer = async (customerId) => {
+    const customer = async (customerName) => {
         try {
-            const res = await getCustomer(customerId)
+            const res = await getCustomer(customerName)
             setData(res.data)
             console.log(res.data)
         } catch (error) {
@@ -113,8 +64,10 @@ const Customer = () => {
     ]
 
     const handleSearch = (e) => {
-        setCustomerId(e)
+        console.log("e", e)
+        setCustomerName(e)
         if (e != "") {
+
             customer(e)
         }
         else {
@@ -130,7 +83,7 @@ const Customer = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
                 <Col>
                     <Search
-                        placeholder="Customer Id"
+                        placeholder="Customer Name"
                         onSearch={(e) => {
                             handleSearch(e);
                         }}

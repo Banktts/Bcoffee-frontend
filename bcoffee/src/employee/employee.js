@@ -117,6 +117,7 @@ const Employee = () => {
         try {
             const res = await deleteEmployee(empId)
             setDeleteModalVisible(false)
+            employee(branchId)
         } catch (error) {
             console.log(error)
         }
@@ -141,16 +142,13 @@ const Employee = () => {
         branchData()
     }
 
-    const handleSubmitEdit = async (position) => {
+    const handleSubmitEdit = async (e) => {
         try {
-            let tmp =position.position
-            console.log(position.position)
-            console.log(empId)
-            const res = await editEmployee({ empId, position })
+            console.log(e)
+            const res = await editEmployee(empId, e.position)
             console.log(res)
             setEditModalVisible(false)
             employee(branchId)
-            branchData()
         } catch (error) {
             console.log(error)
         }
@@ -173,7 +171,11 @@ const Employee = () => {
             <Row justify="space-between" align="middle" className="m-y-16">
 
                 <Col>
-                    <Select defaultValue="all" onChange={handleChangeBranch} >
+                    <Select
+                        showSearch
+                        optionFilterProp="children"
+                        filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
+                        defaultValue="all" onChange={handleChangeBranch} >
                         <Option value="all" key="all">All</Option>
                         {branchList.map((a) => (
                             <Option value={a.branch_id} key={a.branch_id}>
@@ -214,14 +216,8 @@ const Employee = () => {
                     layout="vertical"
                     onFinish={handleSubmitEdit}
                     className="form"
-                >
-                    
+                >                 
                     <CustomSelect defaultValue={()=>handleCurrentPosition()}  name="position" label="" values={PositionList}  />
-
-
-                    
-                
-               
                 <div className="m-t-30 text-center">
                     <Button  type="primary" htmlType="submit" className="button green">
                         Submit
