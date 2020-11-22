@@ -83,7 +83,6 @@ const Inventory = () => {
 
     const handleChangeBranch = (e) => {
         setBranchId(e)
-        console.log(e)
         inventory(e)
     }
 
@@ -92,7 +91,6 @@ const Inventory = () => {
         setItemId(record.item_id)
         setAmountItem(record.amount)
         setBranchIdEdit(record.branch_id)
-        console.log(amountItem)
     };
 
     const handleCancelEdit = () => {
@@ -101,25 +99,22 @@ const Inventory = () => {
 
     const handleSubmitEdit = async () => {
         try {
-            console.log("itemid", itemId)
-            console.log("amountitem", amountItem)
-            console.log("branchid", branchId)
             const res = await editInventory({ itemId, amountItem, branchIdEdit })
             setEditModalVisible(false)
             inventory(branchId)
-
+            branchData() //for what
         } catch (error) {
             console.log(error)
         }
     }
 
     const changeAmount = (e) => {
-        console.log(e.target)
         setAmountItem(e.target.value)
     }
 
     return (
         <div className="inventory-container">
+
             <div className="text-title">
                 Inventory
             </div>

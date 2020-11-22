@@ -20,6 +20,7 @@ const OrderLine = () => {
             setDataOrder(resOrder.data)
             resOrder.data.map((orderLine) => {
                 setTotal(orderLine.totalpriceb)
+                console.log(total)
             })
         } catch (error) {
             console.log(error)

@@ -1,4 +1,5 @@
 import { Button, Col, Row, Select, Table, Form, Modal, Input } from 'antd'
+import { CustomSelect } from '../component/customSelect'
 import React, { useEffect, useState, useCallback } from 'react'
 import { CustomInput } from '../component/customInput'
 import './employee.scss'
@@ -14,8 +15,9 @@ const Employee = () => {
     const [empId, setEmpId] = useState("")
     const [deleteModalVisible, setDeleteModalVisible] = useState(false)
     const [editModalVisible, setEditModalVisible] = useState(false)
-    const [position, setPosition] = useState("")
-
+    const [currentPosition, setCurrentPosition] = useState("")
+    const [form] = Form.useForm();
+    const PositionList = ["Barista","Cashier","Manager" ]
     useEffect(() => {
         employee(branchId)
         branchData()
@@ -129,27 +131,38 @@ const Employee = () => {
     const handleEditEmployee = (record) => {
         setEmpId(record.emp_id)
         setEditModalVisible(true)
-        setPosition(record.position)
+        setCurrentPosition(data[record.emp_id-1].position)
+       
+        
     }
 
     const handleCancelEdit = () => {
         setEditModalVisible(false)
+        employee(branchId)
+        branchData()
     }
 
-    const handleSubmitEdit = async () => {
+    const handleSubmitEdit = async (e) => {
         try {
-            const res = await editEmployee({ empId, position })
+            console.log(e)
+            const res = await editEmployee(empId, e.position)
+            console.log(res)
             setEditModalVisible(false)
             employee(branchId)
         } catch (error) {
             console.log(error)
         }
     }
-
-    const changePosition = (e) => {
-        setPosition(e.target.value)
-    }
-
+    const handleCurrentPosition = useCallback(
+        () => {
+            
+            setCurrentPosition(data[empId-1].position)
+            console.log(data[empId-1].position)
+            return data[empId-1].position
+        },
+        [empId]
+    )
+   
     return (
         <div className="employee-container">
             <div className="text-title">
@@ -195,16 +208,26 @@ const Employee = () => {
                 className="modal-edit">
                 <div className="text-modal">
                     Edit position of employee ?
+                   
                 </div>
-                <Input name="position" value={position} label="Position" rule="required" onChange={changePosition} className="m-t-10" />
+                <Form
+
+                    form={form}
+                    layout="vertical"
+                    onFinish={handleSubmitEdit}
+                    className="form"
+                >                 
+                    <CustomSelect defaultValue={()=>handleCurrentPosition()}  name="position" label="" values={PositionList}  />
                 <div className="m-t-30 text-center">
-                    <Button onClick={handleSubmitEdit} className="button green">
+                    <Button  type="primary" htmlType="submit" className="button green">
                         Submit
                 </Button>
                     <Button onClick={handleCancelEdit} className="button red">
                         Cancel
                 </Button>
+                
                 </div>
+                </Form>
             </Modal>
 
             <Table dataSource={data} columns={columns} pagination={false} className="table" />

@@ -7,55 +7,6 @@ import { Link } from "react-router-dom"
 import './customer.scss'
 import { getCustomer } from '../service/user.service'
 
-const data = [
-    {
-        key: "1",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "2",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "3",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "4",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-    {
-        key: "5",
-        orderId: "O001",
-        customerId: "C002",
-        branchName: "Chula",
-        date: "DD-MM-YYYY",
-        time: "HH:MM",
-        totalPrice: "30000"
-    },
-
-]
-
 const Customer = () => {
     const [customerName, setCustomerName] = useState("none")
     const [data, setData] = useState([])
@@ -66,7 +17,6 @@ const Customer = () => {
 
     const customer = async (customerName) => {
         try {
-            console.log("name", customerName)
             const res = await getCustomer(customerName)
             setData(res.data)
             console.log(res.data)

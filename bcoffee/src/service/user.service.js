@@ -1,10 +1,9 @@
 import axios from 'axios'
 
-const URL = "http://localhost:4000"
 
 export const getMenu = async (branchId) => {
     try {
-        return await axios.get(URL + `/menu/${branchId}`)
+        return await axios.get(`/menu/${branchId}`)
     } catch (err) {
         throw err
     }
@@ -12,7 +11,7 @@ export const getMenu = async (branchId) => {
 
 export const getEmployee = async (branchId) => {
     try {
-        return await axios.get(URL + `/employee/${branchId}`)
+        return await axios.get(`/employee/${branchId}`)
     } catch (err) {
         throw err
     }
@@ -20,7 +19,7 @@ export const getEmployee = async (branchId) => {
 
 export const getOrder = async (branchId, date) => {
     try {
-        return await axios.get(URL + `/all/order/${branchId}/${date}`)
+        return await axios.get(`/all/order/${branchId}/${date}`)
     } catch (err) {
         throw err
     }
@@ -28,7 +27,7 @@ export const getOrder = async (branchId, date) => {
 
 export const getInventory = async (branchId) => {
     try {
-        return await axios.get(URL + `/inventory/${branchId}`)
+        return await axios.get(`/inventory/${branchId}`)
     } catch (err) {
         throw err
     }
@@ -36,7 +35,7 @@ export const getInventory = async (branchId) => {
 
 export const getBranch = async () => {
     try {
-        return await axios.get(URL + "/branch")
+        return await axios.get(`/branch`)
     } catch (err) {
         throw err
     }
@@ -44,15 +43,16 @@ export const getBranch = async () => {
 
 export const getCustomer = async (customerName) => {
     try {
-        return await axios.get(URL + `/customer/${customerName}`)
+        return await axios.get(`/customer/${customerName}`)
     } catch (err) {
         throw err
     }
 }
 //bank
-export const editEmployee = async (data) => {
+export const editEmployee = async (empId, position) => {
     try {
-        return await axios.put(URL + `/update/position/${data.empId}`, data)
+        console.log(empId, position)
+        return await axios.put(`/update/position/${empId}`, { position })
     } catch (err) {
         throw err
     }
@@ -60,7 +60,7 @@ export const editEmployee = async (data) => {
 //mint
 export const deleteEmployee = async (empId) => {
     try {
-        return await axios.delete(URL + `/delete/employee/${empId}`)
+        return await axios.delete(`/delete/employee/${empId}`)
     } catch (err) {
         throw err
     }
@@ -69,7 +69,8 @@ export const deleteEmployee = async (empId) => {
 export const editInventory = async (data) => {
     try {
         console.log("data", data)
-        return await axios.put(URL + `/inventory/update/${data.branchIdEdit}/${data.itemId}`, data)
+
+        return await axios.put(`/inventory/update/${data.branchIdEdit}/${data.itemId}`, data)
     } catch (err) {
         throw err
     }
@@ -77,7 +78,7 @@ export const editInventory = async (data) => {
 //mint
 export const deleteMenu = async (data) => {
     try {
-        return await axios.delete(URL + `/delete/menu/${data.menuId}/${data.branchId}`, data)
+        return await axios.delete(`/delete/menu/${data.menuId}/${data.branchId}`, data)
     } catch (err) {
         throw err
     }
@@ -85,18 +86,17 @@ export const deleteMenu = async (data) => {
 //bank
 export const addCustomer = async (values) => {
     try {
-        let res = await axios.post(URL + '/addcustomer', values)
-        console.log(res.false)
-        return res.data
+        return await axios.post('/customer/add', values)
+
     } catch (err) {
 
-        return false
+        throw err
     }
 }
 
 export const placeOrder = async (data) => {
     try {
-        return await axios.post(URL + "/post/order", data)
+        return await axios.post("/post/order", data)
     } catch (err) {
         throw err
     }
@@ -104,7 +104,7 @@ export const placeOrder = async (data) => {
 
 export const getOrderLine = async (orderId) => {
     try {
-        return await axios.get(URL + `/orderline/${orderId}`)
+        return await axios.get(`/orderline/${orderId}`)
     } catch (err) {
         throw err
     }
@@ -112,7 +112,7 @@ export const getOrderLine = async (orderId) => {
 
 export const getOrderEach = async (orderId) => {
     try {
-        return await axios.get(URL + `/order/${orderId}`)
+        return await axios.get(`/order/${orderId}`)
     } catch (err) {
         throw err
     }
