@@ -113,6 +113,7 @@ const Menu = () => {
         try {
             const res = await deleteMenu({ branchId, menuId })
             setDeleteModalVisible(false)
+            menuData(branchId)
         } catch (error) {
             console.log(error)
         }
