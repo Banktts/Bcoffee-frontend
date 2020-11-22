@@ -33,9 +33,9 @@ export const getInventory = async (branchId) => {
     }
 }
 
-export const getBranch = async (branchId) => {
+export const getBranch = async () => {
     try {
-        return await axios.get( `/branch/${branchId}`)
+        return await axios.get( `/branch`)
     } catch (err) {
         throw err
     }
