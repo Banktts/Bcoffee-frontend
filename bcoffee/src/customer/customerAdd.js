@@ -1,16 +1,16 @@
 import React, { useState, useCallback } from 'react';
-import { Modal, Form,  Button } from 'antd'
+import { Modal, Form, Button } from 'antd'
 import { CustomInput } from '../component/customInput'
 import { CustomSelect } from '../component/customSelect'
 import { CustomDatepicker } from '../component/customDatepicker'
 import { addCustomer } from './../service/user.service'
 import { useHistory } from "react-router-dom";
-import {  ExclamationCircleOutlined, CheckCircleTwoTone } from '@ant-design/icons';
+import { ExclamationCircleOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 import './customerAdd.scss'
 const CustomerAdd = () => {
     const history = useHistory();
     const [form] = Form.useForm();
-    const gender = ["Men", "Women"]
+    const gender = ["Male", "Female"]
     const [values, setValues] = useState({});
     const { confirm, info } = Modal;
 
@@ -20,7 +20,7 @@ const CustomerAdd = () => {
             icon: <CheckCircleTwoTone twoToneColor="#52c41a" />,
             content: 'Are you sure to add new employee.',
             onOk() {
-                return new Promise(async(resolve, reject) => {
+                return new Promise(async (resolve, reject) => {
                     console.log(values)
                     await addCustomer(values)
                     resolve(history.push('/customer'))
@@ -44,18 +44,13 @@ const CustomerAdd = () => {
 
     const submitForm = useCallback(
         (values) => {
+            console.log(values)
+            showConfirm()
             values.birthdate = values.birthdate._d.getDate() + "/" + (values.birthdate._d.getMonth() + 1) + "/" + values.birthdate._d.getFullYear()
             setValues(values)
-            showConfirm()
-            
-
-
         },
         [values]
     )
-
-
-
     return (
         <>
             <div className="container"  >
