@@ -15,7 +15,7 @@ const Employee = () => {
     const [empId, setEmpId] = useState("")
     const [deleteModalVisible, setDeleteModalVisible] = useState(false)
     const [editModalVisible, setEditModalVisible] = useState(false)
-    const [currentPosition, setCurrentPosition] = useState("")
+    const [CurrentPosition, setCurrentPosition] = useState("")
     const [form] = Form.useForm();
     const PositionList = ["Barista","Cashier","Manager" ]
     useEffect(() => {
@@ -27,7 +27,6 @@ const Employee = () => {
         try {
             const res = await getEmployee(branchId)
             setData(res.data)
-            console.log(res.data)
         } catch (error) {
             console.log(error)
         }
@@ -107,10 +106,12 @@ const Employee = () => {
 
     const handleCanceldelete = () => {
         setDeleteModalVisible(false)
+        form.resetFields();
     }
 
     const handleNoDelete = () => {
         setDeleteModalVisible(false)
+        form.resetFields();
     }
 
     const handleYesDelete = async () => {
@@ -129,12 +130,12 @@ const Employee = () => {
     }
 
     const handleEditEmployee = (record) => {
+        form.resetFields();
         setEmpId(record.emp_id)
-        setEditModalVisible(true)
         setCurrentPosition(data[record.emp_id-1].position)
-       
-        
+        setEditModalVisible(true)       
     }
+
 
     const handleCancelEdit = () => {
         setEditModalVisible(false)
@@ -144,24 +145,14 @@ const Employee = () => {
 
     const handleSubmitEdit = async (e) => {
         try {
-            console.log(e)
             const res = await editEmployee(empId, e.position)
-            console.log(res)
             setEditModalVisible(false)
             employee(branchId)
         } catch (error) {
             console.log(error)
         }
     }
-    const handleCurrentPosition = useCallback(
-        () => {
-            
-            setCurrentPosition(data[empId-1].position)
-            console.log(data[empId-1].position)
-            return data[empId-1].position
-        },
-        [empId]
-    )
+   
    
     return (
         <div className="employee-container">
@@ -211,13 +202,12 @@ const Employee = () => {
                    
                 </div>
                 <Form
-
                     form={form}
                     layout="vertical"
                     onFinish={handleSubmitEdit}
-                    className="form"
+                    className="form"   
                 >                 
-                    <CustomSelect defaultValue={()=>handleCurrentPosition()}  name="position" label="" values={PositionList}  />
+                    <CustomSelect defaultValue={CurrentPosition}  name="position" label="" values={PositionList}  />
                 <div className="m-t-30 text-center">
                     <Button  type="primary" htmlType="submit" className="button green">
                         Submit
@@ -229,8 +219,8 @@ const Employee = () => {
                 </div>
                 </Form>
             </Modal>
-
             <Table dataSource={data} columns={columns} pagination={false} className="table" />
+           
         </div>
     )
 }
